@@ -1,0 +1,21 @@
+---
+layout: single
+author_profile: true
+permalink: /publications/
+---
+
+### Publications
+
+#### [Hybrid Neural Representations for Spherical Data](https://arxiv.org/abs/2402.05965)
+
+*arXiv preprint*
+
+In this paper, we study hybrid neural representations for spherical data, a domain of increasing relevance in scientific research. In particular, our work focuses on weather and climate data as well as comic microwave background (CMB) data. Although previous studies have delved into coordinate-based neural representations for spherical signals, they often fail to capture the intricate details of highly nonlinear signals. To address this limitation, we introduce a novel approach named Hybrid Neural Representations for Spherical data (HNeR-S). Our main idea is to use spherical feature-grids to obtain positional features which are combined with a multilayer perception to predict the target signal. We consider feature-grids with equirectangular and hierarchical equal area isolatitude pixelization structures that align with weather data and CMB data, respectively. We extensively verify the effectiveness of our HNeR-S for regression, super-resolution, temporal interpolation, and compression tasks.
+
+
+
+#### [Riemannian Neural SDE: Learning Stochastic Representations on Manifolds](https://proceedings.neurips.cc/paper_files/paper/2022/hash/098491b37deebbe6c007e69815729e09-Abstract-Conference.html)
+
+*ICLRW, NeurIPS 2022*
+
+In recent years, the neural stochastic differential equation (NSDE) has gained attention for modeling stochastic representations with great success in various types of applications. However, it typically loses expressivity when the data representation is manifold-valued. To address this issue, we suggest a principled method for expressing the stochastic representation with the Riemannian neural SDE (RNSDE), which extends the conventional Euclidean NSDE. Empirical results for various tasks demonstrate that the proposed method significantly outperforms baseline methods.
