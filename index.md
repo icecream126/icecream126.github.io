@@ -14,3 +14,6 @@ I'm a M.S.-Ph.D. integrated course student at POSTECH [Machine Learning Lab](htt
 ---
 
 I'm always eager to connect with researchers in the fields of artificial intelligence. Feel free to reach out for discussions, collaborations, or just to share interesting ideas.
+
+## News
+* One paper has been accepted to ICML 2024.
