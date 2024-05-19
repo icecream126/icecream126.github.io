@@ -15,4 +15,4 @@ I'm a M.S.-Ph.D. Integrated course student at POSTECH [Machine Learning Lab](htt
 * 2019 - 2023 : Chung-Ang Univ., Computer Science & Engineering, B.S.
 
 # C.V.
-My curriculum vitae is [here](/assets/pdf/My_resume_template.pdf). (Last update : 2024/02/12)
+My curriculum vitae is [here](/assets/pdf/My_resume.pdf). (Last update : 2024/02/12)

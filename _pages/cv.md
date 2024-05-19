@@ -14,4 +14,4 @@ permalink: /cv/
 - **[Riemannian Neural SDE: Learning Stochastic Representations on Manifolds](https://proceedings.neurips.cc/paper_files/paper/2022/hash/098491b37deebbe6c007e69815729e09-Abstract-Conference.html)**
   
 ### Curriculum Vitae
-Please refer to my [Curriculum Vitae](/assets/pdf/My_resume_template.pdf).
+Please refer to my [Curriculum Vitae](/assets/pdf/My_resume.pdf).
