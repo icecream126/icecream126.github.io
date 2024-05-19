@@ -17,5 +17,3 @@ I'm always eager to connect with researchers in the fields of artificial intelli
 
 ## News
 * One paper has been accepted to ICML 2024.
-* One paper has been accepted to ICMLW 2022 and NeurIPS 2022.
-* I won the Presidential Science Scholarship. (2019-2023)
