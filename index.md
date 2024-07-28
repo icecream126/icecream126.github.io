@@ -9,7 +9,7 @@ author_profile: true
 
 ## About Me
 
-I'm a M.S.-Ph.D. integrated course student at POSTECH [Machine Learning Lab](https://ml.postech.ac.kr/) advised by Prof. [Sungsoo Ahn](https://sites.google.com/view/sungsooahn0215/home).  My main research areas include geometric deep learning, generative models, and implicit neural representations. I'm highly interested in the research fields which learns the scientific & continuous real world problems.
+I'm a M.S.-Ph.D. integrated course student at POSTECH [Machine Learning Lab](https://ml.postech.ac.kr/) advised by [Sungsoo Ahn](https://sites.google.com/view/sungsooahn0215/home).  My main research areas include geometric deep learning, generative models, and implicit neural representations. I'm highly interested in the research fields which learns the scientific & continuous real world problems.
 
 ---
 
