@@ -280,7 +280,7 @@ To make torsion angle prediction compatible with language modeling, the continuo
 Given a real torsion triplet $t$, it is mapped to the closest cluster center using the equation:
 
 $$
-\text{token}(t)=\texxt{argmin}_k \lvert\lvert t-c_k\rvert\rvert _2
+\text{token}(t)=\text{argmin}_k \lvert\lvert t-c_k\rvert\rvert _2
 $$
 where $c_k$ is the $k$-th cluster center.
 
