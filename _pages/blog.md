@@ -6,8 +6,8 @@ permalink: /blog/
 
 # AI810 Blog Post (20255126)
 In this blog post, I reviewed the following two papers:
-1. [Complete and Efficient Graph Transformers for Crystal Material Property Prediction](https://openreview.net/forum?id=BnQY9XiRAS)
-2. [Structure Language Models for Protein Conformation Generation](https://openreview.net/forum?id=OzUNDnpQyd)
+1. [Complete and Efficient Graph Transformers for Crystal Material Property Prediction (ICLR 2024)](https://openreview.net/forum?id=BnQY9XiRAS)
+2. [Structure Language Models for Protein Conformation Generation (ICLR 2025)](https://openreview.net/forum?id=OzUNDnpQyd)
 
 ## [Review 1] Complete and Efficient Graph Transformers for Crystal Material Property Prediction
 **Outline**
@@ -22,24 +22,33 @@ In this blog post, I reviewed the following two papers:
     - [Comments](#comments)
 
 ### <a id="about-this-paper"></a>About this paper
-In this article, I am going to review a paper : [Complete and Efficient Graph Transformers for Crystal Material Property Prediction](https://openreview.net/forum?id=BnQY9XiRAS).
+In this article, I am going to review a paper : [Complete and Efficient Graph Transformers for Crystal Material Property Prediction (ICLR 2024)](https://openreview.net/forum?id=BnQY9XiRAS).
 #### <a id="motivation"></a>Motivation
 Crystal structures are fundamentally different from molecules. They are periodic, infinite in space, and can exhibit chirality. These properties pose several challenges when applying geometric deep learning methods.
 
 ##### Why current methods fall short
 Most crystal graph models approximate a crystal as a finite set of atoms within a single unit cell, and consider only local neighbors within a cutoff radius. However, this leads to two key problems:
 
-1. Geometric Incompleteness
-Models like CGCNN, Matformer, and others often treat different crystal structures as identical if they share local neighborhoods, even if their global structures differ. This can result in predicting the same properties for crystals that are actually very different.
+**1. Geometric incompleteness**
 
-2. Failure to Handle Symmetries
+Models like CGCNN ([Xie and Grossman, 2018](#1)), Matformer ([Guerrero et al., 2022](#2)), and others often treat different crystal structures as identical if they share local neighborhoods, even if their global structures differ. This can result in predicting the same properties for crystals that are actually very different.
+
+**2. Failure to handle symmetries**
+![Symmetries of crystal](../assets/blog/ai810/crystal_symmetries.png)
+*This figure illustrates different types of transformations applied to a crystal structure and their effects on how the crystal appears in both 3D space (top row) and its corresponding 2D lattice representation (bottom row).*
+
 Crystal structures have multiple symmetries:
-    * Translation (shifting the unit cell)
 
-    * Rotation (global orientation)
+* **Translation**: The red dashed unit cell is shifted, but the internal configuration of atoms and their neighbors is preserved. This shows that a translation does not change the intrinsic geometry of the crystal. Only the origin of the coordinate system changes.
 
-    * Periodic transformations (different valid lattice representations)
-    Existing models often violate these symmetries, leading to poor generalization or inconsistent predictions.
+* **Rotation**: The lattice is rotated, and so is the unit cell boundary. This transformation should preserve atomic distances and angles within the unit cell.
+
+* **Periodic transformations**: The red dashed unit cell is redefined using the periodicity of the lattice. Even though the atom positions appear to change, they are equivalent due to periodic boundary conditions.
+
+* **Reflection**: The structure is mirrored. This changes the chirality (handedness) of the molecule or crystal. The reflection does not preserve the same 3D structure if the original structure is chiral.
+
+
+Translation, rotation, and periodic transformations do not change the crystal structure and are considered passive symmetries. In contrast, if a crystal lacks reflection symmetry, applying a reflection will produce its chiral (mirror) image.
 
 ##### The goal
 The authors aim to design crystal representations and neural networks that are:
@@ -73,40 +82,37 @@ The learning task is to predict a property $y$ (either regression or classificat
 
 
 ###### What is geometric completeness?
-A crystal graph is geometrically complete if two crystals that have different atomic arrangements always yield different graph representations. In other words, a crystal graph $G$ is geometrically complete if $G_1=G_2\rightarrow M_1\cong M_2$, where $\cong$ denotes that two crystals are isometric.
-
-This means no two distinct crystals (including chiral forms) can map to the same graph.
+A crystal graph is geometrically complete if two crystals that have different atomic arrangements always yield different graph representations. In other words, a crystal graph $G$ is geometrically complete if $G_1=G_2\rightarrow M_1\cong M_2$, where $\cong$ denotes that two crystals are isometric. In other words, if two crystals $M_1$ and $M_2$ have the same graph representation $G_1 = G_2$, then they must be isometric ($M_1 \cong M_2$). It means that if the graphs are the same, the underlying crystals must be the same too.
 
 ###### What symmetries must be preserved?
-SE(3) Invariance: Invariant to rotation and translation of the entire unit cell (e.g., absolute orientation). Function $f(A, P, L)$ must satisfy:
-$$f(A, P, L) = f(A, RP + b, RL).$$
+SE(3) Invariance: A crystal graph representation is $SE(3)$ invariant if, for any rotation transformation $R\in \mathbb{R}^{3\times 3}, |R|=1$ and transformation $b\in\mathbb{R}^3$, the crystal graph remains the same, $f(A, P, L) = f(A, RP + b, RL)$.
 
-SO(3) Equivariance: Vector features should rotate consistently under global rotation. For vector-valued outputs $f(A, P, L) \in \mathbb{R}^3$:
-$$
-f(A, RP + b, RL) = R f(A, P, L).
-$$
+SO(3) Equivariance: A crystal graph represent is $SO(3)$ equivariant if, for any rotation transformation $R\in\mathbb{R}^{3\times 3}, |R|=1$ and translation transformation $b\in \mathbb{R}^3$, the crystal graph rotates accordingly, $
+f(A, RP + b, RL) = R f(A, P, L)$.
 
-Periodic Invariance: Representations must be invariant to the choice of valid unit cell. If two unit cell descriptions $(A, P, L)$ and $(A', P', L')$ represent the same crystal, then:
-$$
-f(A, P, L) = f(A', P', L').
-$$
+Periodic Invariance: Representations must be invariant to the choice of valid unit cell. If two unit cell descriptions $(A, P, L)$ and $(A', P', L')$ represent the same crystal, then $f(A, P, L) = f(A', P', L')$.
 
 These ensure consistent representation across different crystal encodings.
 
 ##### 2. Proposed Graph Representations
 The authors propose two types of crystal graphs that are provably geometrically complete.
 
+![Comformer](../assets/blog/ai810/comformer_overview.png)
+*Overview of the ComFormer pipeline. Left: Different unit cells of the same crystal due to passive symmetries. Middle: SE(3)-invariant graphs use distances and angles; SE(3)-equivariant graphs use edge vectors. Right: iComFormer (top) processes invariant graphs with scalar features; eComFormer (bottom) handles equivariant graphs with vector features and equivariant updates.*
+
 ###### A. SE(3)-Invariant Crystal Graphs (for iComFormer)
 Each node in the graph represents an atom and all its infinite periodic images.
 
 **Edge Construction**
-* Connect atom $i$ to a periodic duplicate $j'$ of atom $j$ if:
-$| p_{j'} - p_i |_2 \le r$ for cutoff radius $r$
+* Each node $i$ represents an atom in the crystal. For each neighbor node $j$, and its periodic image $j'$, the edge is constructed if $| p_{j'} - p_i |_2 \le r$ where $r$ is a cutoff radius and $p_i$ is the position of atom $i$.
 
-* Each edge feature contains:
-$\left[ | p_{j'} - p_i |2, \theta{j'i,i1}, \theta_{j'i,i2}, \theta_{j'i,i3} \right]$
+* Each edge is represented by the scalar-valued features:
+$$[\lvert\lvert e_{j'i}\rvert\rvert _2\theta_{j'i,i_1}, \theta_{j'i,i_2}, \theta_{j',i,i_3}]$$
 
-where $\theta_{j'i,i1}$ is the angle between the bond vector and the first periodic lattice vector at $i$, and so on.
+where 
+* $\lvert\lvert e_{j'i}\rvert \rvert _2$ is the Euclidean distance between atoms $i$ and $j'$
+
+* \theta_{j'i,i_k} is the angle between e_{j'i} and reference directions defined by the three nearest periodic duplicates $i_1$, $i_2$, $i_3$ of atom $i$.
 
 **Lattice Basis Construction**
 To define local periodic directions at each node:
@@ -114,27 +120,26 @@ To define local periodic directions at each node:
 * Choose three nearest periodic duplicates of atom $i$: $i_1$, $i_2$, $i_3$
 
 * Ensure they form a right-handed orthogonal basis:
-${ e_{ii1}, e_{ii2}, e_{ii3} }$
+${ e_{ii_1}, e_{ii_2}, e_{ii_3} }$
 
 * Normalize and flip directions to maintain consistency and chirality awareness
 
 This graph construction guarantees invariance to all crystal symmetries (SE(3) + periodic invariance), and can distinguish chiral crystals.
 
 ###### B. SO(3)-Equivariant Crystal Graphs (for eComFormer)
-This variant replaces angles with vector-valued features.
+This variant uses vector-valued edge features instead of scalar angles.
+
 
 * Edge feature: $e_{j'i} = p_{j'} - p_i \in \mathbb{R}^3$
 
-* These vectors rotate appropriately under global transformations
-
-This representation preserves SO(3) equivariance and geometric completeness.
+This edge vector transforms equivariantly under global $SE(3)$ operations (such as rotation), allowing the model to preserve $SO(3)$ equivariance and remain geometrically complete.
 
 ##### 3. Network Architecture: ComFormer
 The crystal graphs above are used as input to a novel transformer called ComFormer (Complete Graph Transformer for Crystals), which has two variants:
 
-* **iComFormer**: Built on SE(3)-invariant graphs. It uses scalar-based features (distances and angles).
+* **iComFormer**: Built upon the $SE(3)$-invariant crystal graph. It uses scalar edge features, including distances and angular relations, and processes them through a node-wise transformer combined with an edge-wise transformer.
 
-* **eComFormer**: Built on SO(3)-equivariant graphs. It uses vector features.
+* **eComFormer**: Built upon the $SE(3)$-equivariant crystal graph. It uses vector edge features and includes a node-wise equivariant update module that respects directional transformations.
 
 Each ComFormer layer updates atom-level embeddings using attention over neighbors, respecting the symmetry of the underlying graph. Both variants scale as $\mathcal{O}(nk)$, where $n$ is number of atoms and $k$ is average neighbors.
 
@@ -154,51 +159,45 @@ Proofs use mathematical induction and formal symmetry analysis.
 ##### Benchmarks
 Evaluated on:
 
-1. Materials Project (MP)
+1. JARVIS
 
-2. OQMD
+2. Materials Project (MP)
 
 3. MatBench
 
-Tasks include predicting:
+![Comparison on JARVIS](../assets/blog/ai810/table_jarvis.png)
 
-* Band gap
+One of the experiments compares Mean Absolute Error (MAE) across six different material property prediction tasks on the JARVIS dataset. To summarize:
+* iComFormer achieves the lowest MAE on 4 out of 5 properties.
 
-* Formation energy
+* eComFormer performs second best in many tasks, slightly behind iComFormer.
 
-* Elastic moduli
+* Both variants outperform strong baselines like MatFormer and ALIGNN.
 
-* Classification of crystal types
+![Efficiency analysis](../assets/blog/ai810/table_efficiency_analysis.png)
 
-##### Metrics
-* Regression: Mean Absolute Error (MAE)
+This table compares the computational efficiency and parameter counts of ComFormer variants against baselines. To summarize:
+* ALIGNN is the slowest (327 s/epoch) due to its higher complexity $O(nk^2)$.
 
-* Classification: Accuracy or F1 score
+* iComFormer(3) and iComFormer(4) have relatively small model sizes (4.1M and 5.0M params) compared to eComFormer (12.4M).
+    * iComFormer(3) uses 3 reference neighbors to compute 3 angular features $\theta_{ji,i_1}, \theta_{ji,i_2}, \theta_{ji,i_3}$.
+    * iComFormer(4) uses 4 reference neighbors, introducing an additional angular feature.
 
-##### Key Findings
-* ComFormer variants achieve state-of-the-art on all benchmarks.
+* eComFormer-half provides a lightweight alternative (5.6M params) while maintaining better performance than most baselines.
 
-* iComFormer excels at scalar property prediction (e.g., energy).
+* All ComFormer variants maintain linear complexity $O(nk)$ making them more scalable than ALIGNN while achieving better accuracy.
 
-* eComFormer performs better when directionality matters (e.g., elasticity).
-
-* Prior methods like CGCNN, SchNet, Matformer, and PotNet are outperformed.
 ##### Conclusion
 
 This work provides a breakthrough in representing crystal structures for deep learning. It achieves:
 
-Geometric completeness: every crystal is uniquely represented
+* Geometric completeness: every crystal is uniquely represented
 
-Symmetry awareness: invariance/equivariance under SE(3), SO(3), and periodicity
+* Symmetry awareness: invariance/equivariance under SE(3), SO(3), and periodicity
 
-Efficiency and scalability: linear time complexity
+* Efficiency and scalability: linear time complexity
 
-State-of-the-art performance: across multiple datasets
-
-ComFormer sets a new standard for crystal property prediction and opens new doors for accelerated materials discovery.
-
-
-
+* State-of-the-art performance: across multiple datasets
 
 ### <a id="review"></a>Review
 #### <a id="strengths"></a>Strengths
@@ -219,17 +218,16 @@ Both iComFormer and eComFormer scale linearly with the number of atoms and neigh
 
 
 #### <a id="weaknesses"></a>Weaknesses
-##### 1. Limited discussion of architectural details
-While the graph representations are described in detail, the ComFormer network architecture itself is underexplained. It is not clear how many layers are used, what type of attention is applied, and whether the network borrows directly from standard graph transformers or introduces novel layers. This limits the reproducibility and interpretability of the model design.
+
+##### 1. No direct test of geometric completeness
+Although the authors define and prove geometric completeness, they do not provide experiments that directly test this property. For example, it would be useful to show how the model performs on crystals with small perturbations, near-duplicate structures, or noisy data. These tests would provide direct evidence that the representation behaves as expected in practice.
 
 ##### 2. Lack of comparison to recent geometric deep learning models
-The baselines used are mostly from earlier works (e.g., CGCNN, SchNet, Matformer). The paper would be strengthened by including comparisons to recent equivariant models such as NequIP, E(3)NN, or TorchMD-NET, which are also capable of processing periodic structures with high accuracy.
+The baselines used are mostly from earlier works (e.g., CGCNN ([Xie and Grossman, 2018](#1)), SchNet, Matformer ([Guerrero et al., 2022](#2))). The paper would be strengthened by including comparisons to recent equivariant models such as NequIP, E(3)NN, or TorchMD-NET, which are also capable of processing periodic structures with high accuracy.
 
 ##### 3. Minimal analysis on model generalization
 Although the method is designed to be robust under symmetry transformations and different cell sizes, the authors do not present specific generalization experiments. For example, how well does ComFormer perform on unseen crystal classes, chiral structures, or crystals with varying degrees of disorder?
 
-##### 4. Limited ablation study
-The paper lacks an ablation analysis of the graph construction process. It would be informative to know how much performance drops if, for example, angles are removed from the SE(3)-invariant variant or vector features are simplified in the SO(3)-equivariant variant.
 
 #### <a id="comments"></a>Comments
 This is an excellent and well-rounded paper that combines theoretical rigor with practical impact. The authors address a long-standing gap in the field of crystal representation learning by introducing crystal graphs that are both geometrically complete and symmetry-consistent. These advances are backed by formal proofs and real-world benchmarks.
@@ -253,6 +251,7 @@ However, the paper could benefit from more architectural transparency, stronger 
     - [Comments](#comments-2)
 
 ### <a id="about-this-paper-2"></a>About this paper
+In this article, I am going to review a paper : [Structure Language Models for Protein Conformation Generation (ICLR 2025)](https://openreview.net/forum?id=OzUNDnpQyd).
 #### <a id="motivation-2"></a>Motivation
 Understanding how proteins fold into their three-dimensional structure is important for many applications in biology and drug discovery. Traditional models for generating protein structures often rely on autoregressive decoding or diffusion-based sampling. These approaches are slow and computationally expensive. They also make it difficult to interpret or control the structure generation process.
 
@@ -356,3 +355,7 @@ The method is biologically grounded, computationally practical, and shows promis
 
 The structure language model presents a useful new direction in protein modeling and has strong potential for future work in protein design, structure refinement, and generative biology.
 
+
+## References
+<a name="1">[1]</a> Xie, Tian, and Jeffrey C. Grossman. *Crystal graph convolutional neural networks for an accurate and interpretable prediction of material properties.* Physical Review Letters 120.14 (2018): 145301.  
+<a name="2">[2]</a> Guerrero, Paul, et al. *Matformer: A generative model for procedural materials.* arXiv preprint arXiv:2207.01044 (2022).
