@@ -223,7 +223,7 @@ Both iComFormer and eComFormer scale linearly with the number of atoms and neigh
 Although the authors define and prove geometric completeness, they do not provide experiments that directly test this property. For example, it would be useful to show how the model performs on crystals with small perturbations, near-duplicate structures, or noisy data. These tests would provide direct evidence that the representation behaves as expected in practice.
 
 ##### 2. Lack of comparison to recent geometric deep learning models
-The baselines used are mostly from earlier works (e.g., CGCNN ([Xie and Grossman, 2018](#1)), Matformer ([Guerrero et al., 2022](#2))). The paper would be strengthened by including comparisons to recent equivariant models such as NequIP, E(3)NN, or TorchMD-NET, which are also capable of processing periodic structures with high accuracy.
+The baselines used are mostly from earlier works (e.g., CGCNN ([Xie and Grossman, 2018](#1)), Matformer ([Guerrero et al., 2022](#2))). The paper would be strengthened by including comparisons to recent equivariant models such as NequIP ([Batzner et al., 2022](#5)), E(3)NN ([Geiger et al., 2022](#6)), or TorchMD-NET ([Pelaez et al., 2024](#7)), which are also capable of processing periodic structures with high accuracy.
 
 ##### 3. Minimal analysis on model generalization
 Although the method is designed to be robust under symmetry transformations and different cell sizes, the authors do not present specific generalization experiments. For example, how well does ComFormer perform on unseen crystal classes, chiral structures, or crystals with varying degrees of disorder?
@@ -468,3 +468,9 @@ This paper presents a well-designed and promising approach to protein structure 
 <a name="3">[3]</a>Choudhary, Kamal, et al. "The joint automated repository for various integrated simulations (JARVIS) for data-driven materials design." npj computational materials 6.1 (2020): 173.
 
 <a name="4">[4]</a>Hayes, Thomas, et al. "Simulating 500 million years of evolution with a language model." Science (2025): eads0018.
+
+<a name="5">[5]</a>Batzner, Simon, et al. "E (3)-equivariant graph neural networks for data-efficient and accurate interatomic potentials." Nature communications 13.1 (2022): 2453.
+
+<a name="6">[6]</a>Geiger, Mario, and Tess Smidt. "e3nn: Euclidean neural networks." arXiv preprint arXiv:2207.09453 (2022).
+
+<a name="7">[7]</a>Pelaez, Raul P., et al. "Torchmd-net 2.0: Fast neural network potentials for molecular simulations." Journal of Chemical Theory and Computation 20.10 (2024): 4076-4087.
