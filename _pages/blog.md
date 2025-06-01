@@ -1,6 +1,3 @@
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 ---
 layout: single
 author_profile: true
@@ -82,19 +79,17 @@ This means no two distinct crystals (including chiral forms) can map to the same
 
 ###### What symmetries must be preserved?
 SE(3) Invariance: Invariant to rotation and translation of the entire unit cell (e.g., absolute orientation). Function $f(A, P, L)$ must satisfy:
-```math
-f(A, P, L) = f(A, RP + b, RL).
-```
+$$f(A, P, L) = f(A, RP + b, RL).$$
 
 SO(3) Equivariance: Vector features should rotate consistently under global rotation. For vector-valued outputs $f(A, P, L) \in \mathbb{R}^3$:
-```math
+$$
 f(A, RP + b, RL) = R f(A, P, L).
-```
+$$
 
 Periodic Invariance: Representations must be invariant to the choice of valid unit cell. If two unit cell descriptions $(A, P, L)$ and $(A', P', L')$ represent the same crystal, then:
-```math
+$$
 f(A, P, L) = f(A', P', L').
-```
+$$
 
 These ensure consistent representation across different crystal encodings.
 
@@ -284,9 +279,9 @@ To make torsion angle prediction compatible with language modeling, the continuo
 
 Given a real torsion triplet $t$, it is mapped to the closest cluster center using the equation:
 
-```math
-\text{token}(t)=\argmin_k \lvert\lvert t-c_k\rvert\rvert _2
-```
+$$
+\text{token}(t)=\texxt{argmin}_k \lvert\lvert t-c_k\rvert\rvert _2
+$$
 where $c_k$ is the $k$-th cluster center.
 
 This converts the structure generation problem into a sequence generation task over a finite vocabulary.
@@ -295,16 +290,16 @@ This converts the structure generation problem into a sequence generation task o
 The model is based on a transformer encoder-decoder architecture. The encoder takes the protein sequence and optional structural context as input. The decoder predicts a sequence of torsion tokens in parallel.
 
 The training objective is based on masked language modeling. A random subset of torsion angle tokens is masked, and the model is trained to predict them using the unmasked context. Let $x$ be the input context and $y = (y_1, \ldots, y_n)$ be the true torsion tokens. Let $M$ be the set of masked positions. The loss function is:
-```math
+$$
 \mathcal{L}_{\text{MLM}}=-\sum_{i\in M}\log p(y_i|x,y_{[n]\\ M})
-```
+$$
 This allows the model to learn dependencies between different parts of the protein structure while supporting efficient parallel inference.
 
 ##### Non-Autoregressive Generation
 Traditional sequence models generate tokens one at a time. This is slow and limits parallelism. The structure language model uses a non-autoregressive formulation. It assumes that all torsion angle tokens can be generated independently given the input sequence:
-```math
+$$
 p(y)=\prod_{i=1}^n p(y_i|x)
-```
+$$
 This allows the model to generate full structures in a single step, making it much faster than autoregressive or diffusion-based approaches.
 
 ##### Structure Reconstruction
@@ -316,9 +311,9 @@ The model is evaluated on several datasets including ProteinNet and CATH. It is 
 In the structure recovery task, the model is given a partial structure and asked to complete the missing torsion angles. In the generation task, the model predicts the full structure from the protein sequence.
 
 The quality of predicted structures is evaluated using the root mean square deviation (RMSD) between predicted and true atomic positions. The RMSD is computed as follows:
-```math
+$$
 RMSD=\sqrt{\frac{1}{n}\sum_{i=1}^n\lvert\lvert \hat{x}_i-x_i\rvert\rvert_2^2}
-```
+$$
 The model also reports accuracy in predicting the correct torsion token and measures whether the reconstructed backbone is chemically valid and continuous.
 
 The results show that the structure language model outperforms autoregressive baselines in both speed and accuracy. It also matches or exceeds diffusion models while requiring far less computation. The generated structures are physically realistic and maintain proper backbone continuity.
