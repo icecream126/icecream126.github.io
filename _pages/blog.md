@@ -156,27 +156,23 @@ Proofs use mathematical induction and formal symmetry analysis.
 
 
 #### <a id="experiments"></a>Experiments
-##### Benchmarks
-Evaluated on:
-
-1. JARVIS
-
-2. Materials Project (MP)
-
-3. MatBench
+##### JARVIS benchmark
 <a name="table1"></a>
 ![Comparison on JARVIS](../assets/blog/ai810/table_jarvis.png)
 *Table1: Comparison on JARVIS*
 
-[**Table 1**](#table1) compares Mean Absolute Error (MAE) across six different material property prediction tasks on the JARVIS dataset. To summarize:
+[**Table 1**](#table1) compares Mean Absolute Error (MAE) across six different material property prediction tasks on the JARVIS ([Choudhary et al., 2020](#3)) dataset. To summarize:
 * iComFormer achieves the lowest MAE on 4 out of 5 properties.
 
 * eComFormer performs second best in many tasks, slightly behind iComFormer.
 
 * Both variants outperform strong baselines like MatFormer and ALIGNN.
 
+##### Efficiency analysis
+
 <a name="table2"></a>
 ![Efficiency analysis](../assets/blog/ai810/table_efficiency_analysis.png)
+
 
 *Table2: Efficiency analysis*
 
@@ -227,7 +223,7 @@ Both iComFormer and eComFormer scale linearly with the number of atoms and neigh
 Although the authors define and prove geometric completeness, they do not provide experiments that directly test this property. For example, it would be useful to show how the model performs on crystals with small perturbations, near-duplicate structures, or noisy data. These tests would provide direct evidence that the representation behaves as expected in practice.
 
 ##### 2. Lack of comparison to recent geometric deep learning models
-The baselines used are mostly from earlier works (e.g., CGCNN ([Xie and Grossman, 2018](#1)), SchNet, Matformer ([Guerrero et al., 2022](#2))). The paper would be strengthened by including comparisons to recent equivariant models such as NequIP, E(3)NN, or TorchMD-NET, which are also capable of processing periodic structures with high accuracy.
+The baselines used are mostly from earlier works (e.g., CGCNN ([Xie and Grossman, 2018](#1)), Matformer ([Guerrero et al., 2022](#2))). The paper would be strengthened by including comparisons to recent equivariant models such as NequIP, E(3)NN, or TorchMD-NET, which are also capable of processing periodic structures with high accuracy.
 
 ##### 3. Minimal analysis on model generalization
 Although the method is designed to be robust under symmetry transformations and different cell sizes, the authors do not present specific generalization experiments. For example, how well does ComFormer perform on unseen crystal classes, chiral structures, or crystals with varying degrees of disorder?
@@ -285,7 +281,7 @@ These three angles are sufficient to define the backbone structure of a protein 
 *Figure 3: Overview of the SLM framework.*
 
 ##### Discretizing 3D space
-Protein structures exist in continuous 3D space, but directly modeling them is computationally expensive and geometrically complex. To address this, the paper proposes transforming 3D structures into sequences of discrete latent tokens using a discrete variational autoencoder (dVAE). These tokens:
+Protein structures exist in continuous 3D space, but directly modeling them is computationally expensive and geometrically complex. To address this, the paper proposes transforming 3D structures into sequences of discrete latent tokens using a discrete variational autoencoder (dVAE) ([Hayes et al., 2025](#4)). These tokens:
 
 * Are invariant to global rotations and translations
 
@@ -468,3 +464,7 @@ This paper presents a well-designed and promising approach to protein structure 
 ## References
 <a name="1">[1]</a> Xie, Tian, and Jeffrey C. Grossman. *Crystal graph convolutional neural networks for an accurate and interpretable prediction of material properties.* Physical Review Letters 120.14 (2018): 145301.  
 <a name="2">[2]</a> Guerrero, Paul, et al. *Matformer: A generative model for procedural materials.* arXiv preprint arXiv:2207.01044 (2022).
+
+<a name="3">[3]</a>Choudhary, Kamal, et al. "The joint automated repository for various integrated simulations (JARVIS) for data-driven materials design." npj computational materials 6.1 (2020): 173.
+
+<a name="4">[4]</a>Hayes, Thomas, et al. "Simulating 500 million years of evolution with a language model." Science (2025): eads0018.
