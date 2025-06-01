@@ -265,25 +265,61 @@ Proteins are represented using their torsion angles, specifically the backbone a
 
 Each residue in a protein is represented by a triplet of torsion angles:
 
-* $\phi$ (phi)
+* $\phi$ (phi): The angle of rotation around the bond between the nitrogen atom (N) and the alpha carbon atom (Cα). It determines how the previous residue connects to the current one.
 
-* $\psi$ (psi)
+* $\psi$ (psi): The angle of rotation around the bond between the alpha carbon atom (Cα) and the carbonyl carbon atom (C). It affects the orientation of the current residue with respect to the next one.
 
-* $\omega$ (omega)
+* $\omega$ (omega): The angle of rotation around the peptide bond between the carbonyl carbon (C) of the current residue and the nitrogen (N) of the next residue.
+This angle is typically close to 180 degrees (trans configuration), but in rare cases it can be 0 degrees (cis configuration).
+
+For the figurative explanation of this triplet, refer this [link](http://www.bioinf.org.uk/teaching/bioc0008/pepdihed.gif).
 
 These three angles are sufficient to define the backbone structure of a protein when combined with known bond lengths and bond angles.
 
-Discretizing the Angles
-To make torsion angle prediction compatible with language modeling, the continuous torsion angle space is discretized. The authors cluster real torsion angle triplets into $K$ groups using k-means clustering. Each cluster center becomes a token.
 
-Given a real torsion triplet $t$, it is mapped to the closest cluster center using the equation:
+![SLM framework](../assets/blog/ai810/slm_framework.png)
+##### Discretizing 3D space
+Protein structures exist in continuous 3D space, but directly modeling them is computationally expensive and geometrically complex. To address this, the paper proposes transforming 3D structures into sequences of discrete latent tokens using a discrete variational autoencoder (dVAE). These tokens:
 
-$$
-\text{token}(t)=\text{argmin}_k \lvert\lvert t-c_k\rvert\rvert _2
-$$
-where $c_k$ is the $k$-th cluster center.
+* Are invariant to global rotations and translations
 
-This converts the structure generation problem into a sequence generation task over a finite vocabulary.
+* Encode local structure efficiently
+
+* Enable the use of sequence-based language models for generation and inference
+
+The discretization process consists of two stages using a dVAE.
+
+**Stage 1. Learning the Latent Structure Tokens**
+This stage learns how to map a continuous structure into a discrete representation.
+
+* Input: A protein structure $x$ consisting of 3D atomic coordinates
+
+* Encoder: $q_\psi(z|x)$, which maps $x$ to a sequence of discrete tokens $z = (z_1, z_2, \dots, z_L)$, one per residue
+
+* Codebook: Each token $z_i$ is selected from a fixed vocabulary $\mathcal{V}$, where each token corresponds to a learned local geometry
+
+* Decoder: $p_\phi(x|z, c)$ reconstructs the structure $x$ from the token sequence $z$ and amino acid sequence $c$
+
+This model is trained to optimize the ELBO (Evidence Lower Bound):
+$$\log p(x \mid c) \geq \mathbb{E}_{z \sim q(z \mid x)} \left[ \log p(x \mid z, c) \right] - D_{\mathrm{KL}} \left( q(z \mid x) \parallel p(z \mid c) \right)$$
+During this stage, the prior $p(z|c)$ is fixed, often set to a uniform distribution.
+
+**Stage 2: Learning the Prior Over Tokens**
+In the second stage, the encoder and decoder are fixed. A new language model is trained to learn the distribution of structure tokens given the amino acid sequence.
+
+* Prior Model: $p_\theta(z|c)$ learns to predict the token sequence $z$ from the input sequence $c$
+
+* This is treated as a sequence modeling task where the amino acid sequence is the input and the structure tokens are the output
+
+The training objective is to minimize the KL divergence between $q(z|x)$ and $p(z|c)$.
+
+**Key Properties of the Discretized Representation**
+* Roto-translation Invariance: The encoder $q_\psi(z|x)$ is designed so that the tokens $z$ remain unchanged under global rotation or translation of the structure $x$
+
+* Local Encoding: Each token captures the local geometry of a residue using neighborhood information
+
+* Compactness and Interpretability: A limited-size vocabulary (e.g., 512 tokens) encodes recurring local structural motifs
+
 
 ##### Model Architecture and Objective
 The model is based on a transformer encoder-decoder architecture. The encoder takes the protein sequence and optional structural context as input. The decoder predicts a sequence of torsion tokens in parallel.
