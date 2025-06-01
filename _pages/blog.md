@@ -35,7 +35,7 @@ Models like CGCNN ([Xie and Grossman, 2018](#1)), Matformer ([Guerrero et al., 2
 
 **2. Failure to handle symmetries**
 ![Symmetries of crystal](../assets/blog/ai810/crystal_symmetries.png)
-*This figure illustrates different types of transformations applied to a crystal structure and their effects on how the crystal appears in both 3D space (top row) and its corresponding 2D lattice representation (bottom row).*
+*Figure 1: This figure illustrates different types of transformations applied to a crystal structure and their effects on how the crystal appears in both 3D space (top row) and its corresponding 2D lattice representation (bottom row).*
 
 Crystal structures have multiple symmetries:
 
@@ -98,7 +98,7 @@ These ensure consistent representation across different crystal encodings.
 The authors propose two types of crystal graphs that are provably geometrically complete.
 
 ![Comformer](../assets/blog/ai810/comformer_overview.png)
-*Overview of the ComFormer pipeline. Left: Different unit cells of the same crystal due to passive symmetries. Middle: SE(3)-invariant graphs use distances and angles; SE(3)-equivariant graphs use edge vectors. Right: iComFormer (top) processes invariant graphs with scalar features; eComFormer (bottom) handles equivariant graphs with vector features and equivariant updates.*
+*Figure 2: Overview of the ComFormer pipeline. Left: Different unit cells of the same crystal due to passive symmetries. Middle: SE(3)-invariant graphs use distances and angles; SE(3)-equivariant graphs use edge vectors. Right: iComFormer (top) processes invariant graphs with scalar features; eComFormer (bottom) handles equivariant graphs with vector features and equivariant updates.*
 
 ###### A. SE(3)-Invariant Crystal Graphs (for iComFormer)
 Each node in the graph represents an atom and all its infinite periodic images.
@@ -164,19 +164,23 @@ Evaluated on:
 2. Materials Project (MP)
 
 3. MatBench
-
+<a name="table1"></a>
 ![Comparison on JARVIS](../assets/blog/ai810/table_jarvis.png)
+*Table1: Comparison on JARVIS*
 
-One of the experiments compares Mean Absolute Error (MAE) across six different material property prediction tasks on the JARVIS dataset. To summarize:
+[**Table 1**](#table1) compares Mean Absolute Error (MAE) across six different material property prediction tasks on the JARVIS dataset. To summarize:
 * iComFormer achieves the lowest MAE on 4 out of 5 properties.
 
 * eComFormer performs second best in many tasks, slightly behind iComFormer.
 
 * Both variants outperform strong baselines like MatFormer and ALIGNN.
 
+<a name="table2"></a>
 ![Efficiency analysis](../assets/blog/ai810/table_efficiency_analysis.png)
 
-This table compares the computational efficiency and parameter counts of ComFormer variants against baselines. To summarize:
+*Table2: Efficiency analysis*
+
+[**Table 2**](#table2) compares the computational efficiency and parameter counts of ComFormer variants against baselines. To summarize:
 * ALIGNN is the slowest (327 s/epoch) due to its higher complexity $O(nk^2)$.
 
 * iComFormer(3) and iComFormer(4) have relatively small model sizes (4.1M and 5.0M params) compared to eComFormer (12.4M).
@@ -276,8 +280,10 @@ For the figurative explanation of this triplet, refer this [link](http://www.bio
 
 These three angles are sufficient to define the backbone structure of a protein when combined with known bond lengths and bond angles.
 
-
+<a name="figure-slm-framework"></a>
 ![SLM framework](../assets/blog/ai810/slm_framework.png)
+*Figure 3: Overview of the SLM framework.*
+
 ##### Discretizing 3D space
 Protein structures exist in continuous 3D space, but directly modeling them is computationally expensive and geometrically complex. To address this, the paper proposes transforming 3D structures into sequences of discrete latent tokens using a discrete variational autoencoder (dVAE). These tokens:
 
@@ -289,40 +295,81 @@ Protein structures exist in continuous 3D space, but directly modeling them is c
 
 The discretization process consists of two stages using a dVAE.
 
-**Stage 1. Learning the Latent Structure Tokens**
-This stage learns how to map a continuous structure into a discrete representation.
+**Stage 1. Learning the latent structure tokens**
+This stage learns how to map a continuous structure into a discrete representation. Its process is illustrated at [**Figure 3 (a)**](#figure-slm-framework).
 
-* Input: A protein structure $x$ consisting of 3D atomic coordinates
+Given a protein structure with backbone 3D coordinates $x \in \mathbb{R}^{L \times 3}$, where $L$ is the number of residues, the goal is to convert this continuous representation into a discrete sequence of structure tokens $z = (z_1, z_2, \ldots, z_L)$, where each $z_i \in \mathcal{V}$, a learned codebook of token types. 
 
-* Encoder: $q_\psi(z|x)$, which maps $x$ to a sequence of discrete tokens $z = (z_1, z_2, \dots, z_L)$, one per residue
+To achieve this, the authors introduce a discrete variational autoencoder (dVAE) that consists of: 
 
-* Codebook: Each token $z_i$ is selected from a fixed vocabulary $\mathcal{V}$, where each token corresponds to a learned local geometry
+* Encoder $q_\psi(z \mid x)$: Takes the 3D structure $x$ and computes local neighborhood-aware invariant residue embeddings, which are then quantized into discrete tokens using a codebook.
 
-* Decoder: $p_\phi(x|z, c)$ reconstructs the structure $x$ from the token sequence $z$ and amino acid sequence $c$
+* Codebook $\mathcal{V}$: A fixed set of learned vectors used to discretize continuous embeddings into structure tokens. 
 
-This model is trained to optimize the ELBO (Evidence Lower Bound):
-$$\log p(x \mid c) \geq \mathbb{E}_{z \sim q(z \mid x)} \left[ \log p(x \mid z, c) \right] - D_{\mathrm{KL}} \left( q(z \mid x) \parallel p(z \mid c) \right)$$
-During this stage, the prior $p(z|c)$ is fixed, often set to a uniform distribution.
+* Decoder $p_\phi(x \mid z, c)$: Reconstructs the 3D structure $x$ from the token sequence $z$ and the amino acid sequence $c = (c_1, \ldots, c_L) \in \mathcal{A}^L$, where $\mathcal{A}$ is the amino acid vocabulary. This stage is trained using the following variational lower bound (ELBO):
 
-**Stage 2: Learning the Prior Over Tokens**
-In the second stage, the encoder and decoder are fixed. A new language model is trained to learn the distribution of structure tokens given the amino acid sequence.
+  $$
+  \log p(x \mid c) \geq \mathbb{E}_{z \sim q(z \mid x)} \left[ \log p(x \mid z, c) \right] - D_{\mathrm{KL}} \left( q(z \mid x) \parallel p(z \mid c) \right)
+  $$
 
-* Prior Model: $p_\theta(z|c)$ learns to predict the token sequence $z$ from the input sequence $c$
+* During this stage, the prior $p(z \mid c)$ is fixed, often set to a uniform distribution.
 
-* This is treated as a sequence modeling task where the amino acid sequence is the input and the structure tokens are the output
 
-The training objective is to minimize the KL divergence between $q(z|x)$ and $p(z|c)$.
+**Stage 2: Learning the prior over tokens**
+Once the dVAE is trained, its encoder and decoder are frozen. The next goal, illustrated at [**Figure3 (b)**](#figure-slm-framework), is to model the conditional distribution over structure tokens given the amino acid sequence, denoted: 
+$$p_\theta(z \mid c)$$
 
-**Key Properties of the Discretized Representation**
-* Roto-translation Invariance: The encoder $q_\psi(z|x)$ is designed so that the tokens $z$ remain unchanged under global rotation or translation of the structure $x$
+This is implemented with a Structure Language Model trained to predict the structure token sequence $z$ from the input AA-type sequence $c$, using cross-entropy loss over the predicted tokens. This training process is visualized in Figure 2(b).
 
-* Local Encoding: Each token captures the local geometry of a residue using neighborhood information
+At training time, the model is trained on pairs $(c, z)$ generated from known protein structures and their corresponding tokenizations from the encoder $q_\psi(z \mid x)$.
 
-* Compactness and Interpretability: A limited-size vocabulary (e.g., 512 tokens) encodes recurring local structural motifs
+**Inference: Structure generation and inference**
+At inference time, the trained structure language model is used to sample structure token sequences:
 
+Input: AA-type token sequence $c$
+
+Output: A sampled structure token sequence $z \sim p_\theta(z \mid c)$
+
+This step is shown in Figure 2(c). The model can sample multiple conformations by drawing $n$ samples from $p_\theta(z \mid c)$, generating a conformational ensemble of size $n$.
+
+Each sampled token sequence $z^{(j)}$ is passed through the pretrained decoder $p_\phi(x \mid z, c)$ to reconstruct the corresponding 3D backbone structure $x^{(j)}$.
+
+<a name="figure-autoregressive-prior-modeling"></a>
+![SLM framework](../assets/blog/ai810/autoregressive_prior_modeling.png)
+*Figure 4: Model architecture and structure token generation process.*
 
 ##### Model Architecture and Objective
-The model is based on a transformer encoder-decoder architecture. The encoder takes the protein sequence and optional structural context as input. The decoder predicts a sequence of torsion tokens in parallel.
+To model the conditional distribution of structure tokens given the amino acid sequence, denoted as $p_\theta(z \mid c)$, the paper explores two transformer-based architectures: the encoder-decoder and the decoder-only variants, as shown in [**Figure4**](#figure-autoregressive-prior-modeling).
+
+(a) Encoder–Decoder Architecture 
+
+As illustrated in [**Figure4 (a)**](#figure-autoregressive-prior-modeling):
+
+* Input: A sequence of amino acid tokens $c = (c_1, \ldots, c_L) \in \mathcal{A}^L$
+
+* The encoder processes $c$ to produce contextual embeddings.
+
+* The decoder autoregressively generates the structure tokens $z = (z_1, \ldots, z_L) \in \mathcal{V}^L$, attending to the encoder output via cross-attention.
+
+* The model factorizes the probability as:
+    $$
+    p_\theta(z|c)=\prod^L_{i=1}p_\theta(z_i|z_{<i},c)
+    $$
+
+(b) Decoder-Only Architecture
+
+As illustrated in [**Figure4 (b)**](#figure-autoregressive-prior-modeling):
+
+* The model concatenates the amino acid tokens and a separator token $\texttt{<sep>}$ with the structure tokens as a single sequence:
+    $$
+    x=(c_1,\ldots,c_L\text{<sep>},z_1,\ldots,z_L)
+    $$
+
+* The decoder is trained autoregressively to predict each token from the previous ones:
+    $$
+    p_\theta(z|c)=\prod^L_{i=1}p_\theta(z_i|c,z_{<i})
+    $$
+
 
 The training objective is based on masked language modeling. A random subset of torsion angle tokens is masked, and the model is trained to predict them using the unmasked context. Let $x$ be the input context and $y = (y_1, \ldots, y_n)$ be the true torsion tokens. Let $M$ be the set of masked positions. The loss function is:
 $$
@@ -338,20 +385,50 @@ $$
 This allows the model to generate full structures in a single step, making it much faster than autoregressive or diffusion-based approaches.
 
 ##### Structure Reconstruction
-Once the torsion tokens are predicted, they are mapped back to real torsion angles using the cluster centers. Then, the full 3D structure of the protein backbone is reconstructed using these angles and fixed bond geometry. This is done using geometric rules without any learned parameters.
+After predicting the structure tokens $z = (z_1, \ldots, z_L)$, each token $z_i \in \mathcal{V}$ is mapped to a corresponding torsion angle triplet $(\phi_i, \psi_i, \omega_i)$ using a cluster center lookup. These angles, combined with known bond lengths and bond angles, are used to reconstruct the full 3D protein backbone geometry through deterministic geometric rules. This reconstruction process does not require any additional learned parameters.
 
 #### <a id="experiments-2"></a>Experiments
-The model is evaluated on several datasets including ProteinNet and CATH. It is tested on two main tasks: structure recovery and structure generation.
+The model is evaluated on several datasets including ProteinNet and CATH. It is tested on two main tasks: structure recovery and structure generation. In this blog post, I am going to introduce the result of BPTI conformation generation task.
 
-In the structure recovery task, the model is given a partial structure and asked to complete the missing torsion angles. In the generation task, the model predicts the full structure from the protein sequence.
+##### BPTI conformation generation
+<a name="table3"></a>
+![Table3: BPTI conformation generation](../assets/blog/ai810/table_bpti.png)
 
-The quality of predicted structures is evaluated using the root mean square deviation (RMSD) between predicted and true atomic positions. The RMSD is computed as follows:
-$$
-RMSD=\sqrt{\frac{1}{n}\sum_{i=1}^n\lvert\lvert \hat{x}_i-x_i\rvert\rvert_2^2}
-$$
-The model also reports accuracy in predicting the correct torsion token and measures whether the reconstructed backbone is chemically valid and continuous.
+*Table3: BPTI results*
 
-The results show that the structure language model outperforms autoregressive baselines in both speed and accuracy. It also matches or exceeds diffusion models while requiring far less computation. The generated structures are physically realistic and maintain proper backbone continuity.
+[**Table 3**](#table3) compares the performance of various conformation generation models on the BPTI (Bovine Pancreatic Trypsin Inhibitor) benchmark. The task is to generate realistic protein structures that match a reference ensemble obtained from molecular dynamics (MD) simulations.
+
+The models are categorized into:
+
+* MSA-based methods: Leverage multiple sequence alignments (e.g., AlphaFlow, MSA-Subs.)
+
+* Sequence-based methods: Use only amino acid sequences (e.g., EigenFold, ESMFlow, Str2Str)
+
+* SLM-based methods: Structure Language Models using discrete structure token representations (e.g., ESMDiff, ESM3)
+
+As a result, ESMDiff (DDPM) achieves the lowest JS-PwD (0.372) and JS-TIC (0.420), indicating the generated structures closely resemble the geometric and dynamic distributions of the MD ensemble. Also, ESMDiff (ID) has the lowest root-mean-square deviation from the MD ensemble (RMSD-ens) (1.421), indicating it produces the most geometrically accurate conformations among all models.
+
+##### Runtime analysis
+<a name="table4"></a>
+![Table 4: Runtime analysis](../assets/blog/ai810/runtime_analysis.png)
+*Table4: Runtime analysis result*
+
+ [**Table4**](#table4) evaluates the inference efficiency (in terms of wallclock time) of different protein conformation generation models as a function of protein length.
+
+* The x-axis indicates the number of residues in the input sequence: $L = 50, 100, 200, 500$.
+
+* The y-axis (logarithmic scale) shows the total wallclock time (in seconds) taken to generate a full protein structure.
+
+* The comparison includes models from all major categories:
+
+    * MSA-based methods (e.g., MSA Subsampling, AlphaFlow)
+
+    * Sequence-based methods (e.g., EigenFold, Str2Str, ESMFlow)
+
+    * SLM-based methods (e.g., S-T5, S-GPT, ESMDiff)
+
+As a result, S-T5 and S-GPT are the fastest models across all sequence lengths. Specifically, at $L=500$, S-T5 completes inference in under 100 seconds, while many other models take over 1,000 seconds.
+
 ### <a id="review-2"></a>Review
 #### <a id="strength-2"></a>Strength
 ##### 1. Well-motivated structural formulation
@@ -371,8 +448,8 @@ The model shows strong performance across both structure recovery and generation
 
 
 #### <a id="weaknesses-2"></a>Weaknesses
-##### 1. Limited comparison to recent geometric models
-The evaluation does not include direct comparisons with other structure-aware geometric deep learning models, such as equivariant graph networks or neural fields. This makes it hard to assess how the proposed method performs in comparison to the latest generation of geometric models.
+##### 1. Missing baseline: Pure language models
+The evaluation does not include comparisons with recent pure language models that generate atomic coordinates as text (e.g., MolGPT-style or coordinate-token models). Prior work has shown that such models can effectively represent and sample from conformation spaces. Including this comparison would more clearly justify the need for a dVAE-based representation.
 
 ##### 2. Lack of diversity analysis
 Although the model supports efficient generation, the paper does not discuss the diversity of generated conformations. In practice, multiple conformations can be valid for a single protein sequence, and a generative model should ideally reflect this variability.
@@ -380,16 +457,12 @@ Although the model supports efficient generation, the paper does not discuss the
 ##### 3. Dependence on discretization quality
 The accuracy of structure generation depends on the quality of the torsion token discretization. The paper does not provide a sensitivity analysis for the number of clusters or the effect of imperfect clustering on final structure quality.
 
-##### 4. Limited handling of side chains
-The focus of the model is on the backbone structure. While this is a reasonable simplification, full protein modeling often requires accurate prediction of side chains. The paper does not address how the model might be extended or integrated with existing tools for complete atomic structure generation.
+##### 4. Incomplete evaluation of pretrained ESM3
+While ESM3 is used as a tokenizer, its generation capabilities (e.g., iterative decoding) are not fully explored. Only Gibbs sampling is tested, and no direct comparison is made with ESM3’s native generation setup, which weakens the claim of outperforming prior SOTA.
 
 
 #### <a id="comments-2"></a>Comments
-This paper introduces a novel and well-designed approach to protein structure generation. It makes an important contribution by treating torsion angle prediction as a language modeling task, enabling fast and interpretable structure generation. The use of nonautoregressive transformers and masked language modeling results in an efficient and scalable architecture.
-
-The method is biologically grounded, computationally practical, and shows promising empirical performance. While the paper could benefit from broader comparisons and further diversity analysis, these limitations do not detract from its core contributions.
-
-The structure language model presents a useful new direction in protein modeling and has strong potential for future work in protein design, structure refinement, and generative biology.
+This paper presents a well-designed and promising approach to protein structure modeling by formulating torsion angle prediction as a language modeling problem. The use of discrete structure tokens enables fast, interpretable, and chemically valid generation, and the nonautoregressive architecture provides practical advantages in terms of inference speed. Despite the paper have some issues mentioned in the weaknesses part, it makes an important contribution to the growing literature on structural protein language modeling. 
 
 
 ## References
