@@ -1,8 +1,12 @@
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 ---
 layout: single
 author_profile: true
 permalink: /blog/
 ---
+
 # AI810 Blog Post (20255126)
 In this blog post, I reviewed the following two papers:
 1. [Complete and Efficient Graph Transformers for Crystal Material Property Prediction](https://openreview.net/forum?id=BnQY9XiRAS)
