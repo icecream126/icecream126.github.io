@@ -14,6 +14,3 @@ I'm a first-year PhD student at KAIST in [Structured and Probabilistic Machine L
 ---
 
 I'm always eager to connect with researchers in the fields of artificial intelligence. Feel free to reach out for discussions, collaborations, or just to share interesting ideas.
-
-## News
-* [May, 2024] [HNeR-S](https://openreview.net/forum?id=j6QZy90B93&referrer=%5Bthe%20profile%20of%20Sungsoo%20Ahn%5D(%2Fprofile%3Fid%3D~Sungsoo_Ahn1)) paper has been accepted to ICML 2024.

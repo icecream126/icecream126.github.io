@@ -13,7 +13,7 @@ permalink: /cv/
 
 ### Publications
 - **[MT-Mol: Multi Agent System with Tool-based Reasoning for Molecular Optimization](https://arxiv.org/pdf/2505.20820)**
-- **[Hybrid Neural Representations for Spherical Data](https://arxiv.org/abs/2402.05965)**
+- **[Hybrid Neural Representations for Spherical Data](https://openreview.net/forum?id=j6QZy90B93&referrer=%5Bthe%20profile%20of%20Sungsoo%20Ahn%5D(%2Fprofile%3Fid%3D~Sungsoo_Ahn1))**
 - **[Riemannian Neural SDE: Learning Stochastic Representations on Manifolds](https://proceedings.neurips.cc/paper_files/paper/2022/hash/098491b37deebbe6c007e69815729e09-Abstract-Conference.html)**
   
 ### Curriculum Vitae
