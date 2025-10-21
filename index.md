@@ -9,7 +9,7 @@ author_profile: true
 
 ## About Me
 
-I'm a first-year PhD student at KAIST in [Structured and Probabilistic Machine Learning (SPML) Lab](https://sites.google.com/view/sungsooahn0215), advised by Sungsoo Ahn.  My main research areas include AI4Science, large language models (agentic AI), geometric deep learning, generative models, and implicit neural representations. I'm highly interested in the research fields which learns the scientific & continuous real world problems and solve the problem via language models.
+I'm a first-year PhD student at KAIST in [Structured and Probabilistic Machine Learning (SPML) Lab](https://sites.google.com/view/sungsooahn0215), advised by Sungsoo Ahn.  My main research areas include AI4Science, large language models (AI agent), geometric deep learning, generative models, and implicit neural representations. I'm highly interested in the research fields which learns the scientific & continuous real world problems and solve the problem via language models.
 
 ---
 
