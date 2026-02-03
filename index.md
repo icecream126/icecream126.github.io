@@ -38,6 +38,37 @@ author_profile: true
     box-shadow: none !important;
   }
 
+  /* 모바일에서 프로필 이미지 겹침 방지 */
+  @media (max-width: 1024px) {
+    .author__avatar {
+      display: block;
+      width: auto !important;
+      margin-bottom: 15px;
+    }
+    
+    .author__avatar img {
+      width: 80px !important;
+      max-width: 80px !important;
+      border-radius: 50% !important;
+    }
+    
+    .author__content {
+      display: block !important;
+      padding-left: 0 !important;
+      margin-top: 10px;
+    }
+    
+    .author__content .author__name {
+      font-size: 1.2rem !important;
+      margin-top: 10px !important;
+    }
+    
+    .author__urls-wrapper {
+      display: block !important;
+      margin-top: 10px;
+    }
+  }
+
   /* 2. 프로필 텍스트 정보 확대 */
   .author__content .author__name {
     font-size: 1.5rem !important;
@@ -78,13 +109,13 @@ author_profile: true
   .news-date {
     min-width: 160px;
     font-weight: bold;
-    font-size: 1.0rem;
+    font-size: 1.2rem;
     color: #ffff;
   }
 
   .news-content {
     flex: 1;
-    font-size: 1.0rem;
+    font-size: 1.2rem;
     line-height: 1.4;
   }
 
