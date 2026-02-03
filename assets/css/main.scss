@@ -7,3 +7,42 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* Custom styling for profile image */
+.author__avatar {
+  max-width: 300px;
+  width: 100%;
+  border-radius: 10px;
+  border: 3px solid;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom styling for publication entries */
+.publication-entry {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-left: 4px solid;
+  border-radius: 4px;
+}
+
+/* News table styling */
+.news-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.news-table tr {
+  border-bottom: 1px solid;
+}
+
+.news-table td {
+  padding: 0.75rem;
+  vertical-align: top;
+}
+
+.news-table td:first-child {
+  font-weight: 600;
+  white-space: nowrap;
+  padding-right: 2rem;
+}

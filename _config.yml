@@ -12,7 +12,7 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
@@ -112,7 +112,7 @@ author:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: mailto:hyomin126@postech.ac.kr
+      url: mailto:hyomin126@kaist.ac.kr
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/hyomin-kim-27a004179/"
@@ -140,7 +140,7 @@ footer:
   links:
     - label: "Email"
       icon: "fab fa-fw fa-envelope-square"
-      # url: mailto:hyomin126@postech.ac.kr
+      # url: mailto:hyomin126@kaist.ac.kr
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       # url: "https://www.linkedin.com/in/hyomin-kim-27a004179/"
