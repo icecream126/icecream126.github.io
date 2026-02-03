@@ -40,32 +40,45 @@ author_profile: true
 
   /* 모바일에서 프로필 이미지 겹침 방지 */
   @media (max-width: 1024px) {
+    .sidebar .h-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
     .author__avatar {
-      display: block;
+      display: block !important;
       width: auto !important;
-      margin-bottom: 15px;
+      height: auto !important;
+      margin-bottom: 10px;
+      float: none !important;
     }
     
     .author__avatar img {
-      width: 80px !important;
-      max-width: 80px !important;
+      width: 60px !important;
+      max-width: 60px !important;
+      height: 60px !important;
       border-radius: 50% !important;
     }
     
     .author__content {
       display: block !important;
       padding-left: 0 !important;
-      margin-top: 10px;
+      margin-top: 5px;
+      width: 100% !important;
+      clear: both !important;
     }
     
     .author__content .author__name {
-      font-size: 1.2rem !important;
-      margin-top: 10px !important;
+      font-size: 1.1rem !important;
+      margin-top: 5px !important;
+      margin-bottom: 5px !important;
     }
     
     .author__urls-wrapper {
       display: block !important;
-      margin-top: 10px;
+      margin-top: 5px;
+      clear: both !important;
     }
   }
 
@@ -144,7 +157,7 @@ author_profile: true
 </style>
 
 ## 👋 About Me
-I'm a first-year PhD student at KAIST in [Structured and Probabilistic Machine Learning (SPML) Lab](https://sites.google.com/view/sungsooahn0215), advised by Sungsoo Ahn. My main research areas include AI4Science, large language models (AI agent), geometric deep learning, generative models, and implicit neural representations. I'm highly interested in the research fields which learns the scientific & continuous real world problems and solve the problem via language models.
+I'm a first-year PhD student at KAIST in [Structured and Probabilistic Machine Learning (SPML) Lab](https://sungsoo-ahn.github.io/sungsooahn0215), advised by Sungsoo Ahn. My main research areas include AI4Science, large language models (AI agent), geometric deep learning, generative models, and implicit neural representations. I'm highly interested in the research fields which learns the scientific & continuous real world problems and solve the problem via language models.
 
 I'm always eager to connect with researchers in the fields of artificial intelligence. Feel free to reach out for discussions, collaborations, or just to share interesting ideas.
 
