@@ -4,6 +4,7 @@ author_profile: true
 ---
 
 <style>
+  /* bundle exec jekyll serve */
   /* [폰트 설정] 구글 폰트 적용 */
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
@@ -122,13 +123,13 @@ author_profile: true
   .news-date {
     min-width: 160px;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     color: #ffff;
   }
 
   .news-content {
     flex: 1;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     line-height: 1.4;
   }
 
