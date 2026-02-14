@@ -1,0 +1,284 @@
+/* ============================================================
+   Theme Variables — Light / Dark / Custom
+   ============================================================ */
+
+/* ---------- Light Theme (default) ---------- */
+[data-theme="light"] {
+    --color-primary: #6366f1;
+    --color-primary-rgb: 99, 102, 241;
+    --color-primary-light: #818cf8;
+    --color-primary-dark: #4f46e5;
+
+    --color-accent: #8b5cf6;
+    --color-accent-rgb: 139, 92, 246;
+
+    --color-bg: #ffffff;
+    --color-bg-rgb: 255, 255, 255;
+    --color-bg-secondary: #f8fafc;
+    --color-bg-tertiary: #f1f5f9;
+
+    --color-text: #1e293b;
+    --color-text-rgb: 30, 41, 59;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94a3b8;
+
+    --color-border: #e2e8f0;
+    --color-border-light: #f1f5f9;
+
+    --color-surface: #ffffff;
+    --color-surface-elevated: #ffffff;
+
+    --color-card-bg: #ffffff;
+    --color-card-shadow: rgba(0, 0, 0, 0.06);
+    --color-card-shadow-hover: rgba(99, 102, 241, 0.12);
+
+    --color-nav-bg: rgba(255, 255, 255, 0.85);
+    --color-nav-shadow: rgba(0, 0, 0, 0.05);
+
+    --color-hero-gradient-start: #eef2ff;
+    --color-hero-gradient-end: #ffffff;
+
+    --color-badge-conference: #6366f1;
+    --color-badge-journal: #059669;
+    --color-badge-preprint: #d97706;
+
+    --color-code-bg: #f1f5f9;
+    --color-bibtex-bg: #f8fafc;
+
+    --color-timeline-line: #e2e8f0;
+    --color-timeline-dot: #6366f1;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+    --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    --gradient-hero: linear-gradient(160deg, var(--color-hero-gradient-start) 0%, var(--color-hero-gradient-end) 100%);
+
+    --color-scrollbar-thumb: #cbd5e1;
+    --color-scrollbar-track: #f1f5f9;
+}
+
+/* ---------- Dark Theme ---------- */
+[data-theme="dark"] {
+    --color-primary: #818cf8;
+    --color-primary-rgb: 129, 140, 248;
+    --color-primary-light: #a5b4fc;
+    --color-primary-dark: #6366f1;
+
+    --color-accent: #a78bfa;
+    --color-accent-rgb: 167, 139, 250;
+
+    --color-bg: #0f172a;
+    --color-bg-rgb: 15, 23, 42;
+    --color-bg-secondary: #1e293b;
+    --color-bg-tertiary: #334155;
+
+    --color-text: #e2e8f0;
+    --color-text-rgb: 226, 232, 240;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+
+    --color-border: #334155;
+    --color-border-light: #1e293b;
+
+    --color-surface: #1e293b;
+    --color-surface-elevated: #1e293b;
+
+    --color-card-bg: #1e293b;
+    --color-card-shadow: rgba(0, 0, 0, 0.3);
+    --color-card-shadow-hover: rgba(129, 140, 248, 0.15);
+
+    --color-nav-bg: rgba(15, 23, 42, 0.9);
+    --color-nav-shadow: rgba(0, 0, 0, 0.2);
+
+    --color-hero-gradient-start: #0f172a;
+    --color-hero-gradient-end: #1e293b;
+
+    --color-badge-conference: #818cf8;
+    --color-badge-journal: #34d399;
+    --color-badge-preprint: #fbbf24;
+
+    --color-code-bg: #1e293b;
+    --color-bibtex-bg: #1e293b;
+
+    --color-timeline-line: #334155;
+    --color-timeline-dot: #818cf8;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+
+    --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    --gradient-hero: linear-gradient(160deg, var(--color-hero-gradient-start) 0%, var(--color-hero-gradient-end) 100%);
+
+    --color-scrollbar-thumb: #475569;
+    --color-scrollbar-track: #1e293b;
+}
+
+/* ---------- Custom Theme (overridden by JS) ---------- */
+[data-theme="custom"] {
+    --color-primary: var(--custom-primary, #6366f1);
+    --color-primary-rgb: var(--custom-primary-rgb, 99, 102, 241);
+    --color-primary-light: var(--custom-primary-light, #818cf8);
+    --color-primary-dark: var(--custom-primary-dark, #4f46e5);
+
+    --color-accent: var(--custom-accent, #8b5cf6);
+    --color-accent-rgb: var(--custom-accent-rgb, 139, 92, 246);
+
+    --color-bg: var(--custom-bg, #ffffff);
+    --color-bg-rgb: var(--custom-bg-rgb, 255, 255, 255);
+    --color-bg-secondary: var(--custom-bg-secondary, #f8fafc);
+    --color-bg-tertiary: var(--custom-bg-tertiary, #f1f5f9);
+
+    --color-text: var(--custom-text, #1e293b);
+    --color-text-rgb: var(--custom-text-rgb, 30, 41, 59);
+    --color-text-secondary: var(--custom-text-secondary, #475569);
+    --color-text-muted: var(--custom-text-muted, #94a3b8);
+
+    --color-border: var(--custom-border, #e2e8f0);
+    --color-border-light: var(--custom-border-light, #f1f5f9);
+
+    --color-surface: var(--custom-bg, #ffffff);
+    --color-surface-elevated: var(--custom-bg, #ffffff);
+
+    --color-card-bg: var(--custom-bg, #ffffff);
+    --color-card-shadow: rgba(0, 0, 0, 0.06);
+    --color-card-shadow-hover: rgba(var(--custom-primary-rgb, 99, 102, 241), 0.12);
+
+    --color-nav-bg: rgba(var(--custom-bg-rgb, 255, 255, 255), 0.85);
+    --color-nav-shadow: rgba(0, 0, 0, 0.05);
+
+    --color-hero-gradient-start: var(--custom-bg-secondary, #eef2ff);
+    --color-hero-gradient-end: var(--custom-bg, #ffffff);
+
+    --color-badge-conference: var(--custom-primary, #6366f1);
+    --color-badge-journal: #059669;
+    --color-badge-preprint: #d97706;
+
+    --color-code-bg: var(--custom-bg-tertiary, #f1f5f9);
+    --color-bibtex-bg: var(--custom-bg-secondary, #f8fafc);
+
+    --color-timeline-line: var(--custom-border, #e2e8f0);
+    --color-timeline-dot: var(--custom-primary, #6366f1);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+    --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    --gradient-hero: linear-gradient(160deg, var(--color-hero-gradient-start) 0%, var(--color-hero-gradient-end) 100%);
+
+    --color-scrollbar-thumb: var(--custom-border, #cbd5e1);
+    --color-scrollbar-track: var(--custom-bg-secondary, #f1f5f9);
+}
+
+/* ---------- System preference fallback ---------- */
+@media (prefers-color-scheme: dark) {
+    [data-theme="system"] {
+        --color-primary: #818cf8;
+        --color-primary-rgb: 129, 140, 248;
+        --color-primary-light: #a5b4fc;
+        --color-primary-dark: #6366f1;
+        --color-accent: #a78bfa;
+        --color-accent-rgb: 167, 139, 250;
+        --color-bg: #0f172a;
+        --color-bg-rgb: 15, 23, 42;
+        --color-bg-secondary: #1e293b;
+        --color-bg-tertiary: #334155;
+        --color-text: #e2e8f0;
+        --color-text-rgb: 226, 232, 240;
+        --color-text-secondary: #94a3b8;
+        --color-text-muted: #64748b;
+        --color-border: #334155;
+        --color-border-light: #1e293b;
+        --color-surface: #1e293b;
+        --color-surface-elevated: #1e293b;
+        --color-card-bg: #1e293b;
+        --color-card-shadow: rgba(0, 0, 0, 0.3);
+        --color-card-shadow-hover: rgba(129, 140, 248, 0.15);
+        --color-nav-bg: rgba(15, 23, 42, 0.9);
+        --color-nav-shadow: rgba(0, 0, 0, 0.2);
+        --color-hero-gradient-start: #0f172a;
+        --color-hero-gradient-end: #1e293b;
+        --color-badge-conference: #818cf8;
+        --color-badge-journal: #34d399;
+        --color-badge-preprint: #fbbf24;
+        --color-code-bg: #1e293b;
+        --color-bibtex-bg: #1e293b;
+        --color-timeline-line: #334155;
+        --color-timeline-dot: #818cf8;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+        --gradient-hero: linear-gradient(160deg, var(--color-hero-gradient-start) 0%, var(--color-hero-gradient-end) 100%);
+        --color-scrollbar-thumb: #475569;
+        --color-scrollbar-track: #1e293b;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    [data-theme="system"] {
+        --color-primary: #6366f1;
+        --color-primary-rgb: 99, 102, 241;
+        --color-primary-light: #818cf8;
+        --color-primary-dark: #4f46e5;
+        --color-accent: #8b5cf6;
+        --color-accent-rgb: 139, 92, 246;
+        --color-bg: #ffffff;
+        --color-bg-rgb: 255, 255, 255;
+        --color-bg-secondary: #f8fafc;
+        --color-bg-tertiary: #f1f5f9;
+        --color-text: #1e293b;
+        --color-text-rgb: 30, 41, 59;
+        --color-text-secondary: #475569;
+        --color-text-muted: #94a3b8;
+        --color-border: #e2e8f0;
+        --color-border-light: #f1f5f9;
+        --color-surface: #ffffff;
+        --color-surface-elevated: #ffffff;
+        --color-card-bg: #ffffff;
+        --color-card-shadow: rgba(0, 0, 0, 0.06);
+        --color-card-shadow-hover: rgba(99, 102, 241, 0.12);
+        --color-nav-bg: rgba(255, 255, 255, 0.85);
+        --color-nav-shadow: rgba(0, 0, 0, 0.05);
+        --color-hero-gradient-start: #eef2ff;
+        --color-hero-gradient-end: #ffffff;
+        --color-badge-conference: #6366f1;
+        --color-badge-journal: #059669;
+        --color-badge-preprint: #d97706;
+        --color-code-bg: #f1f5f9;
+        --color-bibtex-bg: #f8fafc;
+        --color-timeline-line: #e2e8f0;
+        --color-timeline-dot: #6366f1;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+        --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+        --gradient-hero: linear-gradient(160deg, var(--color-hero-gradient-start) 0%, var(--color-hero-gradient-end) 100%);
+        --color-scrollbar-thumb: #cbd5e1;
+        --color-scrollbar-track: #f1f5f9;
+    }
+}
+
+/* ---------- Print ---------- */
+@media print {
+    :root,
+    [data-theme] {
+        --color-bg: #ffffff !important;
+        --color-text: #000000 !important;
+        --color-text-secondary: #333333 !important;
+        --color-border: #cccccc !important;
+        --color-card-bg: #ffffff !important;
+        --shadow-sm: none !important;
+        --shadow-md: none !important;
+        --shadow-lg: none !important;
+        --shadow-xl: none !important;
+    }
+}

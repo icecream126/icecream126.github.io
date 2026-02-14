@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyomin Kim — AI Researcher</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Personal academic homepage of Hyomin Kim, Ph.D. student at KAIST working on AI4Science, LLM agents, and generative models.">
+    <meta name="author" content="Hyomin Kim">
+    <meta name="keywords" content="Hyomin Kim, KAIST, AI4Science, machine learning, deep learning, LLM, generative models, geometric deep learning">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Hyomin Kim — AI Researcher">
+    <meta property="og:description" content="Personal academic homepage of Hyomin Kim, Ph.D. student at KAIST working on AI4Science, LLM agents, and generative models.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://icecream126.github.io">
+    <meta property="og:image" content="https://icecream126.github.io/assets/img/profile.jpeg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" aria-label="Home"></a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links" role="menubar">
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#news" role="menuitem">News</a></li>
+                <li role="none"><a href="#publications" role="menuitem">Publications</a></li>
+                <li role="none"><a href="assets/cv/cv.pdf" target="_blank" rel="noopener noreferrer" role="menuitem">CV</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="palette-toggle" class="icon-btn" aria-label="Open custom color picker" title="Custom colors">
+                    <i class="fas fa-palette"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Custom Theme Panel -->
+    <div id="theme-panel" class="theme-panel" aria-label="Custom theme settings" hidden>
+        <div class="theme-panel-header">
+            <h3>Custom Colors</h3>
+            <button id="theme-panel-close" class="icon-btn" aria-label="Close color picker">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="theme-panel-body">
+            <div class="color-input-group">
+                <label for="color-primary">Primary</label>
+                <input type="color" id="color-primary" value="#6366f1">
+            </div>
+            <div class="color-input-group">
+                <label for="color-background">Background</label>
+                <input type="color" id="color-background" value="#ffffff">
+            </div>
+            <div class="color-input-group">
+                <label for="color-text">Text</label>
+                <input type="color" id="color-text" value="#1e293b">
+            </div>
+            <div class="color-input-group">
+                <label for="color-accent">Accent</label>
+                <input type="color" id="color-accent" value="#8b5cf6">
+            </div>
+            <button id="apply-custom-theme" class="btn btn-primary btn-sm">Apply Custom Theme</button>
+            <button id="reset-custom-theme" class="btn btn-outline btn-sm">Reset to Default</button>
+        </div>
+    </div>
+
+    <!-- Hero / About -->
+    <section id="hero" aria-label="About me">
+        <canvas id="particle-canvas" aria-hidden="true"></canvas>
+        <div class="hero-content container">
+            <div class="hero-text" id="hero-text">
+                <!-- Rendered by render.js -->
+            </div>
+            <div class="hero-photo" id="hero-photo">
+                <!-- Rendered by render.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Bio (below hero fold) -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div id="about-content" class="about-content">
+                <!-- Rendered by render.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- News -->
+    <section id="news" class="section">
+        <div class="container">
+            <h2 class="section-title">News</h2>
+            <div id="news-timeline" class="timeline">
+                <!-- Rendered by render.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications" class="section">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="pub-controls" id="pub-controls">
+                <div class="pub-search-wrapper">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input type="text" id="pub-search" placeholder="Search publications..." aria-label="Search publications">
+                </div>
+                <div class="pub-filters" id="pub-filters" role="group" aria-label="Filter publications">
+                    <button class="filter-pill active" data-filter="all">All</button>
+                    <button class="filter-pill" data-filter="conference">Conference</button>
+                    <button class="filter-pill" data-filter="journal">Journal</button>
+                    <button class="filter-pill" data-filter="preprint">Preprint</button>
+                </div>
+            </div>
+            <div id="pub-list" class="pub-list">
+                <!-- Rendered by render.js -->
+            </div>
+            <p id="pub-no-results" class="pub-no-results" hidden>No publications match your search.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div id="footer-content">
+                <!-- Rendered by render.js -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="scroll-top" class="scroll-top-btn" aria-label="Scroll to top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts (order matters) -->
+    <script src="config.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

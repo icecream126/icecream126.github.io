@@ -1,0 +1,198 @@
+/* ============================================================
+   Responsive — Mobile / Tablet Breakpoints
+   ============================================================ */
+
+/* ---------- Tablet (< 768px) ---------- */
+@media (max-width: 768px) {
+    /* Navigation */
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-direction: column;
+        background: var(--color-bg);
+        padding: 24px;
+        gap: 4px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 9999;
+        overflow-y: auto;
+    }
+
+    .nav-links.open {
+        transform: translateX(0);
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        padding: 14px 16px;
+    }
+
+    /* Hero */
+    #hero {
+        min-height: auto;
+        padding: 100px 0 60px;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .hero-text {
+        order: 2;
+        max-width: 100%;
+    }
+
+    .hero-photo {
+        order: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-photo-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero-name {
+        font-size: 2.4rem;
+    }
+
+    .hero-social {
+        justify-content: center;
+    }
+
+    /* Sections */
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+    }
+
+    /* Publications */
+    .pub-card {
+        padding: 20px;
+    }
+
+    .pub-card-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* CV */
+    .cv-entry {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .cv-entry-period {
+        margin-left: 0;
+        font-size: 0.82rem;
+    }
+
+    /* Theme Panel */
+    .theme-panel {
+        right: 16px;
+        left: 16px;
+        width: auto;
+    }
+
+    /* Scroll to top */
+    .scroll-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ---------- Small Mobile (< 480px) ---------- */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero-name {
+        font-size: 2rem;
+    }
+
+    .hero-title {
+        font-size: 1.1rem;
+    }
+
+    .profile-photo-wrapper {
+        width: 160px;
+        height: 160px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .pub-title {
+        font-size: 1rem;
+    }
+
+    .pub-links {
+        gap: 6px;
+    }
+
+    .pub-link-btn {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+
+    .bibtex-content pre {
+        font-size: 0.7rem;
+        padding: 12px;
+        padding-right: 40px;
+    }
+
+    .nav-container {
+        padding: 0 16px;
+    }
+
+    .filter-pill {
+        padding: 5px 12px;
+        font-size: 0.78rem;
+    }
+}
+
+/* ---------- Very small (< 375px) ---------- */
+@media (max-width: 375px) {
+    .hero-name {
+        font-size: 1.7rem;
+    }
+
+    .hero-title {
+        font-size: 1rem;
+    }
+
+    .profile-photo-wrapper {
+        width: 140px;
+        height: 140px;
+    }
+
+    .social-link {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+}
+
+/* ---------- Large screens (> 1200px) ---------- */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
