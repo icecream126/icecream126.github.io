@@ -12,8 +12,8 @@ var SITE_CONFIG = {
     affiliation: "KAIST",
     affiliationUrl: "https://www.kaist.ac.kr",
     bio: `I'm a second-year PhD student at KAIST in
-          <a href="https://sungsoo-ahn.github.io/sungsooahn0215">Structured and Probabilistic Machine Learning (SPML) Lab</a>,
-          advised by <a href="https://sungsoo-ahn.github.io/sungsooahn0215">Sungsoo Ahn</a>.
+          <a href="https://sungsoo-ahn.github.io/">Structured and Probabilistic Machine Learning (SPML) Lab</a>,
+          advised by Sungsoo Ahn.
           My main research areas include AI4Science, large language models (AI agent),
           geometric deep learning, generative models, and implicit neural representations.
           I'm highly interested in research fields that learn scientific &amp; continuous
@@ -39,27 +39,27 @@ var SITE_CONFIG = {
     news: [
         {
             date: "Feb 2026",
-            text: 'Two preprints on biological perturbation prediction released: <strong>"Progressive Multi-Agent Reasoning for Biological Perturbation Prediction"</strong> and <strong>"Learning Adaptive Perturbation-Conditioned Contexts for Robust Transcriptional Response Prediction"</strong>.',
+            text: "Two preprints on biological perturbation prediction released.",
         },
         {
             date: "Jan 2026",
-            text: 'New preprint <strong>"DNAChunker: Learnable Tokenization for DNA Language Models"</strong> is now available on arXiv!',
+            text: '<strong>"DNAChunker"</strong> preprint available on arXiv.',
         },
         {
             date: "Oct 2025",
-            text: "Started research internship at <strong>HITS</strong>, working on LLMs for discovering mechanisms of action in cell perturbation.",
+            text: "Research internship at <strong>HITS</strong>.",
         },
         {
             date: "Sep 2025",
-            text: 'Paper <strong>"MT-Mol: Multi Agent System with Tool-based Reasoning for Molecular Optimization"</strong> accepted at <strong>EMNLP 2025 Findings</strong>!',
+            text: '<strong>"MT-Mol"</strong> accepted at <strong>EMNLP 2025 Findings</strong>.',
         },
         {
             date: "Feb 2025",
-            text: "Started Ph.D. at <strong>KAIST Kim Jaechul Graduate School of AI</strong>, advised by Sungsoo Ahn.",
+            text: "Started Ph.D. at <strong>KAIST AI</strong>, advised by Sungsoo Ahn.",
         },
         {
             date: "May 2024",
-            text: 'Paper <strong>"Hybrid Neural Representations for Spherical Data"</strong> accepted at <strong>ICML 2024</strong>!',
+            text: '<strong>"HNeR-S"</strong> accepted at <strong>ICML 2024</strong>.',
         },
     ],
 
