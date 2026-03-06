@@ -743,6 +743,7 @@ img {
 .pub-venue-badge.conference { background: var(--color-badge-conference); }
 .pub-venue-badge.journal { background: var(--color-badge-journal); }
 .pub-venue-badge.preprint { background: var(--color-badge-preprint); }
+.pub-venue-badge.workshop { background: var(--color-badge-workshop); }
 
 .pub-title {
     font-family: 'Source Serif 4', Georgia, serif;

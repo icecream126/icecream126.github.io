@@ -41,6 +41,7 @@
     --color-badge-conference: #6366f1;
     --color-badge-journal: #059669;
     --color-badge-preprint: #d97706;
+    --color-badge-workshop: #6366f1;
 
     --color-code-bg: #f1f5f9;
     --color-bibtex-bg: #f8fafc;
@@ -99,6 +100,7 @@
     --color-badge-conference: #818cf8;
     --color-badge-journal: #34d399;
     --color-badge-preprint: #fbbf24;
+    --color-badge-workshop: #818cf8;
 
     --color-code-bg: #1e293b;
     --color-bibtex-bg: #1e293b;
@@ -157,6 +159,7 @@
     --color-badge-conference: var(--custom-primary, #6366f1);
     --color-badge-journal: #059669;
     --color-badge-preprint: #d97706;
+    --color-badge-workshop: #6366f1;
 
     --color-code-bg: var(--custom-bg-tertiary, #f1f5f9);
     --color-bibtex-bg: var(--custom-bg-secondary, #f8fafc);
@@ -207,6 +210,7 @@
         --color-badge-conference: #818cf8;
         --color-badge-journal: #34d399;
         --color-badge-preprint: #fbbf24;
+        --color-badge-workshop: #818cf8;
         --color-code-bg: #1e293b;
         --color-bibtex-bg: #1e293b;
         --color-timeline-line: #334155;
@@ -252,6 +256,7 @@
         --color-badge-conference: #6366f1;
         --color-badge-journal: #059669;
         --color-badge-preprint: #d97706;
+        --color-badge-workshop: #6366f1;
         --color-code-bg: #f1f5f9;
         --color-bibtex-bg: #f8fafc;
         --color-timeline-line: #e2e8f0;
