@@ -185,7 +185,7 @@
             const entry = el("div", { className: "timeline-item reveal" });
             entry.appendChild(el("span", { className: "timeline-date" }, item.date));
             const text = el("p", { className: "timeline-text" });
-            text.innerHTML = item.text;
+            text.innerHTML = item.text.replace(/\n/g, "<br>");
             entry.appendChild(text);
             timeline.appendChild(entry);
         });

@@ -38,12 +38,12 @@ var SITE_CONFIG = {
     // ---- News ----
     news: [
         {
-            date: "Feb 2026",
-            text: "Two preprints on biological perturbation prediction released.",
+            date: "Mar 2026",
+            text: '<strong>"DNAChunker"</strong> accepted at ICLRW MLGenX Workshop.\n <strong>"AdaPert"</strong> accepted at ICLR MLGenX and GEM Workshop.',
         },
         {
-            date: "Jan 2026",
-            text: '<strong>"DNAChunker"</strong> preprint available on arXiv.',
+            date: "Feb 2026",
+            text: '<strong>"PBio-Agent"</strong> preprint available on arXiv.',
         },
         {
             date: "Oct 2025",
