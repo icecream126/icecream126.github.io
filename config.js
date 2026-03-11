@@ -11,7 +11,7 @@ var SITE_CONFIG = {
     title: "Ph.D. Student in AI",
     affiliation: "KAIST",
     affiliationUrl: "https://www.kaist.ac.kr",
-    bio: `I'm a second-year PhD student at <a href="https://www.kaist.ac.kr/en/">KAIST in
+    bio: `I'm a second-year PhD student at <a href="https://www.kaist.ac.kr/en/">KAIST</a> in
           <a href="https://sungsoo-ahn.github.io/">Structured and Probabilistic Machine Learning (SPML) Lab</a>,
           advised by Sungsoo Ahn.
           My main research areas include AI4Science, large language models (AI agent),
