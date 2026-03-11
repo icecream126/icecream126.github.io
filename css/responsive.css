@@ -10,11 +10,10 @@
     }
 
     .nav-links {
-        position: fixed;
+        position: absolute;
         top: 64px;
         left: 0;
         right: 0;
-        bottom: 0;
         flex-direction: column;
         background: var(--color-bg);
         padding: 24px;
@@ -23,6 +22,8 @@
         transition: transform 0.3s ease;
         z-index: 9999;
         overflow-y: auto;
+        max-height: calc(100vh - 64px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links.open {

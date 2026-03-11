@@ -11,7 +11,7 @@ var SITE_CONFIG = {
     title: "Ph.D. Student in AI",
     affiliation: "KAIST",
     affiliationUrl: "https://www.kaist.ac.kr",
-    bio: `I'm a second-year PhD student at KAIST in
+    bio: `I'm a second-year PhD student at <a href="https://www.kaist.ac.kr/en/">KAIST in
           <a href="https://sungsoo-ahn.github.io/">Structured and Probabilistic Machine Learning (SPML) Lab</a>,
           advised by Sungsoo Ahn.
           My main research areas include AI4Science, large language models (AI agent),
@@ -89,7 +89,7 @@ var SITE_CONFIG = {
             title: "Learning Adaptive Perturbation-Conditioned Contexts for Robust Transcriptional Response Prediction",
             authors: ["Yinhua Piao", "Hyomin Kim", "Seonghwan Kim", "Yunhak Oh", "Junhyeok Jeon", "Sang-Yeon Hwang", "Jaechang Lim", "Woo Youn Kim", "Chanyoung Park", "Sungsoo Ahn"],
             highlightAuthor: "Hyomin Kim",
-            venue: "ICLR MLGenX Workshop",
+            venue: "ICLR MLGenX, GEM Workshop",
             venueShort: "ICLRW",
             year: 2026,
             type: "workshop",
