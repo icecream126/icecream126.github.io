@@ -60,7 +60,7 @@
         heroText.innerHTML = "";
         heroText.appendChild(el("p", { className: "hero-greeting" }, "Hello, I'm"));
         const nameEl = el("h1", { className: "hero-name", id: "typed-name" });
-        nameEl.innerHTML = `<span class="name-text"></span><span class="typing-cursor"></span>`;
+        nameEl.innerHTML = `<span class="name-text">${C.name}</span>`;
         heroText.appendChild(nameEl);
         heroText.appendChild(el("p", { className: "hero-title" }, C.title));
 

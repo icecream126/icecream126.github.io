@@ -38,28 +38,32 @@ var SITE_CONFIG = {
     // ---- News ----
     news: [
         {
-            date: "Mar 2026",
-            text: '<strong>"DNAChunker"</strong> accepted at ICLRW MLGenX Workshop.\n <strong>"AdaPert"</strong> accepted at ICLR MLGenX and GEM Workshop.',
+            date: "May 2026",
+            text: '🎖️ Mentioned as a Gold Reviewer (Top 25%) at ICML 2026',
         },
         {
-            date: "Feb 2026",
-            text: '<strong>"PBio-Agent"</strong> preprint available on arXiv.',
+            date: "April 2026",
+            text: '📜 Two papers accepted at <strong>ICML</strong>\n 🏢 Research internship at <strong>SONY</strong>',
+        },
+        {
+            date: "Mar 2026",
+            text: '📜 Two papers accepted at <strong>ICLRW MLGenX and GEM Workshop</strong>',
         },
         {
             date: "Oct 2025",
-            text: "Research internship at <strong>HITS</strong>.",
+            text: "🏢 Research internship at <strong>HITS</strong>",
         },
         {
             date: "Sep 2025",
-            text: '<strong>"MT-Mol"</strong> accepted at <strong>EMNLP 2025 Findings</strong>.',
+            text: '📜 One paper accepted at <strong>EMNLP 2025 Findings</strong>',
         },
         {
             date: "Feb 2025",
-            text: "Started Ph.D. at <strong>KAIST AI</strong>, advised by Sungsoo Ahn.",
+            text: "🎓 Started Ph.D. at <strong>KAIST AI</strong>, advised by Sungsoo Ahn",
         },
         {
             date: "May 2024",
-            text: '<strong>"HNeR-S"</strong> accepted at <strong>ICML 2024</strong>.',
+            text: '📜 One paper accepted at <strong>ICML 2024</strong>',
         },
     ],
 
@@ -89,8 +93,8 @@ var SITE_CONFIG = {
             title: "Learning Adaptive Perturbation-Conditioned Contexts for Robust Transcriptional Response Prediction",
             authors: ["Yinhua Piao", "Hyomin Kim", "Seonghwan Kim", "Yunhak Oh", "Junhyeok Jeon", "Sang-Yeon Hwang", "Jaechang Lim", "Woo Youn Kim", "Chanyoung Park", "Sungsoo Ahn"],
             highlightAuthor: "Hyomin Kim",
-            venue: "ICLR MLGenX, GEM Workshop",
-            venueShort: "ICLRW",
+            venue: "ICML, ICLR MLGenX, GEM Workshop",
+            venueShort: "ICML",
             year: 2026,
             type: "workshop",
             links: {
@@ -109,8 +113,8 @@ var SITE_CONFIG = {
             title: "DNAChunker: Learnable Tokenization for DNA Language Models",
             authors: ["Taewon Kim", "Jihwan Shin", "Hyomin Kim", "Youngmok Jung", "Jonghoon Lee", "Won-Chul Lee", "Insu Han", "Sungsoo Ahn"],
             highlightAuthor: "Hyomin Kim",
-            venue: "ICLR MLGenX Workshop",
-            venueShort: "ICLRW",
+            venue: "ICML, ICLR MLGenX Workshop",
+            venueShort: "ICML",
             year: 2026,
             type: "workshop",
             links: {

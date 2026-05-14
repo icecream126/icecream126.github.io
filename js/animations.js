@@ -33,45 +33,7 @@
         reveals.forEach((el) => observer.observe(el));
     }
 
-    // ---------- Typing Animation ----------
-    function initTypingAnimation() {
-        const nameSpan = document.querySelector(".name-text");
-        const cursor = document.querySelector(".typing-cursor");
-        if (!nameSpan) return;
-
-        const C = window.SITE_CONFIG;
-        const fullName = (C && C.name) || "Your Name";
-
-        if (prefersReducedMotion) {
-            nameSpan.textContent = fullName;
-            if (cursor) cursor.style.display = "none";
-            return;
-        }
-
-        let i = 0;
-        const speed = 80;
-
-        function type() {
-            if (i < fullName.length) {
-                nameSpan.textContent += fullName.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                // Remove cursor after a delay
-                setTimeout(() => {
-                    if (cursor) cursor.style.opacity = "0";
-                    setTimeout(() => {
-                        if (cursor) cursor.style.display = "none";
-                    }, 500);
-                }, 2000);
-            }
-        }
-
-        // Start after a brief delay
-        setTimeout(type, 500);
-    }
-
-    // ---------- Particle Canvas Background ----------
+// ---------- Particle Canvas Background ----------
     function initParticles() {
         const canvas = document.getElementById("particle-canvas");
         if (!canvas || prefersReducedMotion) return;
@@ -211,7 +173,6 @@
     // ---------- Init ----------
     function init() {
         initScrollReveal();
-        initTypingAnimation();
         initParticles();
         initScrollProgress();
         initScrollToTop();
