@@ -45,7 +45,7 @@
                 <span></span>
             </button>
             <ul class="nav-links" id="nav-links" role="menubar">
-                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#hero" role="menuitem">About</a></li>
                 <li role="none"><a href="#news" role="menuitem">News</a></li>
                 <li role="none"><a href="#publications" role="menuitem">Publications</a></li>
                 <li role="none"><a href="assets/cv/cv.pdf" target="_blank" rel="noopener noreferrer" role="menuitem">CV</a></li>
@@ -91,24 +91,14 @@
         </div>
     </div>
 
-    <!-- Hero / About -->
+    <!-- Hero / About (merged) -->
     <section id="hero" aria-label="About me">
         <canvas id="particle-canvas" aria-hidden="true"></canvas>
         <div class="hero-content container">
-            <div class="hero-text" id="hero-text">
-                <!-- Rendered by render.js -->
-            </div>
             <div class="hero-photo" id="hero-photo">
                 <!-- Rendered by render.js -->
             </div>
-        </div>
-    </section>
-
-    <!-- About / Bio (below hero fold) -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div id="about-content" class="about-content">
+            <div class="hero-text" id="hero-text">
                 <!-- Rendered by render.js -->
             </div>
         </div>
@@ -136,7 +126,7 @@
                 <div class="pub-filters" id="pub-filters" role="group" aria-label="Filter publications">
                     <button class="filter-pill active" data-filter="all">All</button>
                     <button class="filter-pill" data-filter="conference">Conference</button>
-                    <button class="filter-pill" data-filter="journal">Journal</button>
+                    <button class="filter-pill" data-filter="workshop">Workshop</button>
                     <button class="filter-pill" data-filter="preprint">Preprint</button>
                 </div>
             </div>

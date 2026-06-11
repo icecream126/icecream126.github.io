@@ -14,12 +14,7 @@ var SITE_CONFIG = {
     bio: `I'm a second-year PhD student at <a href="https://www.kaist.ac.kr/en/">KAIST</a> in
           <a href="https://sungsoo-ahn.github.io/">Structured and Probabilistic Machine Learning (SPML) Lab</a>,
           advised by Sungsoo Ahn.
-          My main research areas include AI4Science, large language models (AI agent),
-          geometric deep learning, generative models, and implicit neural representations.
-          I'm highly interested in research fields that learn scientific &amp; continuous
-          real-world problems and solve them via language models.<br><br>
-          I'm always eager to connect with researchers in artificial intelligence.
-          Feel free to reach out for discussions, collaborations, or just to share interesting ideas.`,
+          My research spans AI4Science, multi-modal, LLM agents, and generative models with a focus on solving real-world problem via language models.`,
     profilePhoto: "assets/img/profile.jpeg",
 
     // ---- Social Links ----
@@ -39,15 +34,11 @@ var SITE_CONFIG = {
     news: [
         {
             date: "May 2026",
-            text: '🎖️ Mentioned as a Gold Reviewer (Top 25%) at ICML 2026',
+            text: '📜 One paper accepted at <strong>ICML GenBio Workshop</strong>\n🎖️ Mentioned as a Gold Reviewer (Top 25%) at ICML 2026',
         },
         {
             date: "April 2026",
             text: '📜 Two papers accepted at <strong>ICML</strong>\n 🏢 Research internship at <strong>SONY</strong>',
-        },
-        {
-            date: "Mar 2026",
-            text: '📜 Two papers accepted at <strong>ICLRW MLGenX and GEM Workshop</strong>',
         },
         {
             date: "Oct 2025",
@@ -73,10 +64,11 @@ var SITE_CONFIG = {
             title: "Progressive Multi-Agent Reasoning for Biological Perturbation Prediction",
             authors: ["Hyomin Kim", "Sang-Yeon Hwang", "Jaechang Lim", "Yinhua Piao", "Yunhak Oh", "Woo Youn Kim", "Chanyoung Park", "Sungsoo Ahn", "Junhyeok Jeon"],
             highlightAuthor: "Hyomin Kim",
-            venue: "Preprint",
-            venueShort: "Preprint",
+            venue: "ICMLW",
+            venueShort: "ICMLW",
             year: 2026,
-            type: "preprint",
+            type: "workshop",
+            thumbnail: "assets/img/papers/pbioagent.png",
             links: {
                 pdf: "https://arxiv.org/abs/2602.07408",
                 code: "https://github.com/icecream126/LINCSQA-PBIOAGENT/tree/main",
@@ -96,7 +88,8 @@ var SITE_CONFIG = {
             venue: "ICML, ICLR MLGenX, GEM Workshop",
             venueShort: "ICML",
             year: 2026,
-            type: "workshop",
+            type: "conference",
+            thumbnail: "assets/img/papers/adapert.png",
             links: {
                 pdf: "https://arxiv.org/pdf/2602.18885v1",
                 code: "",
@@ -116,7 +109,8 @@ var SITE_CONFIG = {
             venue: "ICML, ICLR MLGenX Workshop",
             venueShort: "ICML",
             year: 2026,
-            type: "workshop",
+            type: "conference",
+            thumbnail: "assets/img/papers/dnachunker.png",
             links: {
                 pdf: "https://arxiv.org/pdf/2601.03019v1",
                 code: "",
@@ -137,6 +131,7 @@ var SITE_CONFIG = {
             venueShort: "EMNLP",
             year: 2025,
             type: "conference",
+            thumbnail: "assets/img/papers/mtmol.png",
             links: {
                 pdf: "https://arxiv.org/abs/2505.20820",
                 code: "https://github.com/icecream126/mt_mol",
@@ -157,6 +152,7 @@ var SITE_CONFIG = {
             venueShort: "ICML",
             year: 2024,
             type: "conference",
+            thumbnail: "assets/img/papers/hners.png",
             links: {
                 pdf: "https://proceedings.mlr.press/v235/kim24i.html",
                 code: "https://github.com/icecream126/HNeR-S/tree/main",
@@ -177,6 +173,7 @@ var SITE_CONFIG = {
             venueShort: "NeurIPS",
             year: 2022,
             type: "conference",
+            thumbnail: "assets/img/papers/RNSDE.png",
             links: {
                 pdf: "https://proceedings.neurips.cc/paper_files/paper/2022/file/098491b37deebbe6c007e69815729e09-Paper-Conference.pdf",
                 code: "",

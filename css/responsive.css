@@ -43,17 +43,15 @@
 
     .hero-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 32px;
         text-align: center;
     }
 
     .hero-text {
-        order: 2;
         max-width: 100%;
     }
 
     .hero-photo {
-        order: 1;
         display: flex;
         justify-content: center;
     }
@@ -64,7 +62,11 @@
     }
 
     .hero-name {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
+    }
+
+    .hero-bio {
+        text-align: left;
     }
 
     .hero-social {
@@ -83,6 +85,17 @@
     /* Publications */
     .pub-card {
         padding: 20px;
+    }
+
+    .pub-body {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .pub-thumbnail {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
     }
 
     .pub-card-header {
@@ -124,16 +137,21 @@
     }
 
     .hero-name {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
 
-    .hero-title {
-        font-size: 1.1rem;
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-bio {
+        font-size: 1rem;
+        line-height: 1.85;
     }
 
     .profile-photo-wrapper {
-        width: 160px;
-        height: 160px;
+        width: 170px;
+        height: 170px;
     }
 
     .section-title {
@@ -172,16 +190,21 @@
 /* ---------- Very small (< 375px) ---------- */
 @media (max-width: 375px) {
     .hero-name {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
     }
 
-    .hero-title {
-        font-size: 1rem;
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .hero-bio {
+        font-size: 0.95rem;
+        line-height: 1.8;
     }
 
     .profile-photo-wrapper {
-        width: 140px;
-        height: 140px;
+        width: 150px;
+        height: 150px;
     }
 
     .social-link {

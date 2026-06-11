@@ -58,24 +58,26 @@
 
         // Text side
         heroText.innerHTML = "";
-        heroText.appendChild(el("p", { className: "hero-greeting" }, "Hello, I'm"));
         const nameEl = el("h1", { className: "hero-name", id: "typed-name" });
         nameEl.innerHTML = `<span class="name-text">${C.name}</span>`;
         heroText.appendChild(nameEl);
-        heroText.appendChild(el("p", { className: "hero-title" }, C.title));
 
-        const affLink = el("p", { className: "hero-affiliation" });
-        if (C.affiliationUrl) {
-            affLink.innerHTML = `<a href="${C.affiliationUrl}">${C.affiliation}</a>`;
-        } else {
-            affLink.textContent = C.affiliation;
+        const subtitle = el("p", { className: "hero-subtitle" });
+        const affHtml = C.affiliationUrl
+            ? `<a href="${C.affiliationUrl}">${C.affiliation}</a>`
+            : C.affiliation;
+        subtitle.innerHTML = `${C.title} · ${affHtml}`;
+        heroText.appendChild(subtitle);
+
+        if (C.bio) {
+            const bio = el("p", { className: "hero-bio" });
+            bio.innerHTML = C.bio;
+            heroText.appendChild(bio);
         }
-        heroText.appendChild(affLink);
 
         // Social links
         const socialRow = el("div", { className: "hero-social" });
-        const socialItems = buildSocialLinks();
-        socialItems.forEach((a) => socialRow.appendChild(a));
+        buildSocialLinks().forEach((a) => socialRow.appendChild(a));
         heroText.appendChild(socialRow);
 
         // Photo side
@@ -168,13 +170,6 @@
         return links;
     }
 
-    // ---------- About ----------
-    function renderAbout() {
-        const container = document.getElementById("about-content");
-        if (!container || !C.bio) return;
-        container.innerHTML = `<p class="reveal">${C.bio}</p>`;
-    }
-
     // ---------- News ----------
     function renderNews() {
         const timeline = document.getElementById("news-timeline");
@@ -204,13 +199,29 @@
                 "data-year": String(pub.year),
             });
 
+            // Body: thumbnail + content
+            const body = el("div", { className: "pub-body" });
+
+            // Thumbnail (fallback to deterministic placeholder if missing)
+            const thumbSrc = pub.thumbnail ||
+                `https://picsum.photos/seed/${encodeURIComponent(pub.title)}/320/220`;
+            const thumb = el("div", { className: "pub-thumbnail" });
+            thumb.appendChild(el("img", {
+                src: thumbSrc,
+                alt: `Thumbnail for ${pub.title}`,
+                loading: "lazy",
+            }));
+            body.appendChild(thumb);
+
+            const content = el("div", { className: "pub-content" });
+
             // Header: badge + title
             const header = el("div", { className: "pub-card-header" });
             header.appendChild(
                 el("span", { className: `pub-venue-badge ${pub.type}` }, pub.venueShort)
             );
             header.appendChild(el("span", { className: "pub-title" }, pub.title));
-            card.appendChild(header);
+            content.appendChild(header);
 
             // Authors
             const authorsP = el("p", { className: "pub-authors" });
@@ -221,10 +232,10 @@
                         : a
                 )
                 .join(", ");
-            card.appendChild(authorsP);
+            content.appendChild(authorsP);
 
             // Venue
-            card.appendChild(
+            content.appendChild(
                 el("p", { className: "pub-venue" }, `${pub.venue}, ${pub.year}`)
             );
 
@@ -282,7 +293,10 @@
                 bibtexBtn.innerHTML = '<i class="fas fa-quote-right"></i> BibTeX';
                 linksDiv.appendChild(bibtexBtn);
             }
-            card.appendChild(linksDiv);
+            content.appendChild(linksDiv);
+
+            body.appendChild(content);
+            card.appendChild(body);
 
             // BibTeX content
             if (pub.bibtex) {
@@ -407,7 +421,6 @@
         renderMeta();
         renderNavLogo();
         renderHero();
-        renderAbout();
         renderNews();
         renderPublications();
         renderFooter();

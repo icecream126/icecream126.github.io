@@ -58,6 +58,7 @@ php -S localhost:8000
 │   └── main.js             # Navigation, pub filter/search, BibTeX copy
 ├── assets/
 │   ├── img/profile.svg     # Your profile photo (replace this)
+│   ├── img/papers/         # Publication thumbnails (320×220 recommended)
 │   └── cv/cv.pdf           # Your CV (replace this)
 └── README.md
 ```
@@ -94,7 +95,8 @@ php -S localhost:8000
     venue: "Full Venue Name (Abbrev)",
     venueShort: "ICML",                 // Shown on badge
     year: 2026,
-    type: "conference",                 // "conference" | "journal" | "preprint"
+    type: "conference",                 // "conference" | "workshop" | "preprint"
+    thumbnail: "assets/img/papers/my-paper.png",  // Empty "" → random placeholder
     links: {
         pdf: "https://...",
         code: "https://github.com/...",
@@ -103,6 +105,26 @@ php -S localhost:8000
     bibtex: `@inproceedings{...}`,
 }
 ```
+
+### Publication Thumbnails
+
+Each publication card shows a thumbnail next to its content. To add your own:
+
+1. **Save the image** under `assets/img/papers/` (create the folder if it doesn't exist).
+   - Format: `.png`, `.jpg`, or `.webp`
+   - Recommended size: **320 × 220 px** (16:11 aspect ratio matches the card)
+   - Keep files under ~150 KB for fast loading — compress with [TinyPNG](https://tinypng.com/) or `squoosh.app`
+   - Use a teaser figure, architecture diagram, or main result plot — something visually distinctive at small size
+
+2. **Set the path** in `config.js` on the matching publication:
+
+   ```js
+   thumbnail: "assets/img/papers/my-paper.png",
+   ```
+
+3. **Leave it empty (`""`) or omit the field** to fall back to a deterministic random image from [picsum.photos](https://picsum.photos) — useful while drafting. The seed is the paper title, so the same paper always shows the same placeholder.
+
+**Tip:** name files after the paper's short tag for clarity, e.g., `hners.png`, `mt-mol.png`, `riemannian-sde.png`.
 
 ### Themes
 
